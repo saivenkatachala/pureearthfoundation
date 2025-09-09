@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Property Registration Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" type="image/png" href="logo.png" />
   <style>
     :root {
@@ -32,16 +33,17 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--light-bg);
-      padding: 15px 20px; /* Reduced from 20px */
+      padding: 15px 10px;
       line-height: 1.6;
       color: var(--text);
+      font-size: 16px; /* Base font size for mobile */
     }
 
     .container {
       max-width: 850px;
       margin: auto;
       background: var(--card-bg);
-      padding: 25px 30px; /* Reduced from 30px 35px */
+      padding: 20px;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       transition: var(--transition);
@@ -51,43 +53,32 @@
       box-shadow: var(--shadow-hover);
     }
 
-
-
-
-    
-
     .logo-box {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 0 auto 5px auto;
-}
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0 auto 5px auto;
+    }
 
-.logo {
-  max-width: 200px;
-  height: auto;
-  transition: transform 0.2s ease;
-}
+    .logo {
+      max-width: 180px;
+      height: auto;
+      transition: transform 0.2s ease;
+    }
 
-.logo:hover {
-  transform: scale(1.02);
-}
-
-
-
-    
+    .logo:hover {
+      transform: scale(1.02);
+    }
 
     h1 {
       text-align: center;
       color: var(--primary);
-      margin: 10px 0 15px; /* Reduced from 15px 0 20px */
-      font-size: 26px; /* Reduced from 28px */
-      padding-bottom: 10px; /* Reduced from 12px */
-      /* font-size: 28px; */
+      margin: 10px 0 15px;
+      font-size: 1.6rem; /* Using rem for responsive sizing */
+      padding-bottom: 10px;
       position: relative;
-      /* padding-bottom: 12px; */
     }
 
     h1:after {
@@ -96,7 +87,7 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 70px; /* Reduced from 80px */
+      width: 70px;
       height: 3px;
       background: var(--primary);
       border-radius: 3px;
@@ -107,16 +98,19 @@
       margin: 20px 0 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
+      font-size: 1.3rem;
     }
 
     p {
       text-align: justify;
       margin-bottom: 20px;
       color: var(--text);
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     form {
-        margin-top: 1px; /* Reduced from 25px */
+      margin-top: 1px;
     }
 
     .form-section {
@@ -134,17 +128,17 @@
       margin-top: 18px;
       font-weight: 600;
       color: var(--text);
-      font-size: 15px;
+      font-size: 1rem;
     }
 
     input, select, textarea {
       width: 100%;
       box-sizing: border-box;
-      padding: 12px 15px;
+      padding: 14px 15px; /* Slightly larger for mobile touch */
       margin-top: 8px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      font-size: 15px;
+      font-size: 16px; /* Prevents zoom on iOS */
       transition: var(--transition);
       background: var(--card-bg);
       color: var(--text);
@@ -168,7 +162,8 @@
     .radio-group { 
       margin-top: 10px;
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap; /* Allows wrapping on small screens */
+      gap: 15px;
     }
 
     .radio-group label {
@@ -177,6 +172,7 @@
       margin-top: 0;
       font-weight: normal;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .radio-group input { 
@@ -187,7 +183,8 @@
     .qr { 
       display: block; 
       margin: 20px auto; 
-      width: 200px; 
+      max-width: 200px; 
+      width: 100%;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 10px;
@@ -206,14 +203,16 @@
     .submit-btn button {
       background: var(--secondary);
       color: #fff;
-      padding: 14px 40px;
+      padding: 16px 40px;
       border: none;
       border-radius: var(--radius);
-      font-size: 17px;
+      font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
       transition: var(--transition);
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      width: 100%; /* Full width on mobile */
+      max-width: 300px; /* But limit max width */
     }
 
     .submit-btn button:hover { 
@@ -224,7 +223,7 @@
 
     .doc-note { 
       margin-top: 6px; 
-      font-size: 13.5px; 
+      font-size: 0.9rem; 
       color: var(--text-light); 
       font-style: italic; 
     }
@@ -240,7 +239,7 @@
     .guideline-box label {
       display: inline-flex;
       align-items: center;
-      font-size: 16px;
+      font-size: 1rem;
       margin-top: 0;
       cursor: pointer;
     }
@@ -264,11 +263,12 @@
     li {
       margin-bottom: 8px;
       color: var(--text);
+      font-size: 1rem;
     }
 
     /* File input styling */
     input[type="file"] {
-      padding: 10px;
+      padding: 12px;
       background: #f8f9fa;
       border: 1px dashed var(--border);
     }
@@ -276,35 +276,90 @@
     input[type="file"]::file-selector-button {
       background: var(--accent);
       color: white;
-      padding: 8px 16px;
+      padding: 10px 16px;
       border: none;
       border-radius: 4px;
       margin-right: 12px;
       cursor: pointer;
       transition: var(--transition);
+      font-size: 0.9rem;
     }
 
     input[type="file"]::file-selector-button:hover {
       background: #004957;
     }
-    @media (max-width: 768px) {
-  .logo {
-    max-width: 180px; /* Smaller logo on mobile */
-  }
-}
-    /* Responsive design */
-    @media (max-width: 768px) {
+
+    /* Responsive design for tablets and larger phones */
+    @media (min-width: 481px) {
+      body {
+        padding: 15px 20px;
+        font-size: 16px;
+      }
+      
       .container {
-        padding: 20px;
+        padding: 25px 30px;
+      }
+      
+      .submit-btn button {
+        width: auto;
+      }
+    }
+
+    /* Responsive design for desktop */
+    @media (min-width: 769px) {
+      body {
+        font-size: 16px;
+      }
+      
+      .container {
+        padding: 30px 35px;
       }
       
       h1 {
-        font-size: 24px;
+        font-size: 1.75rem;
+        margin: 15px 0 20px;
+      }
+      
+      input, select, textarea {
+        padding: 12px 15px;
+        font-size: 15px;
+      }
+    }
+
+    /* Responsive design for small mobile devices */
+    @media (max-width: 480px) {
+      .logo {
+        max-width: 150px;
+      }
+      
+      h1 {
+        font-size: 1.4rem;
+      }
+      
+      h3 {
+        font-size: 1.2rem;
       }
       
       .radio-group {
         flex-direction: column;
         gap: 10px;
+      }
+      
+      input[type="file"]::file-selector-button {
+        display: block;
+        width: 100%;
+        margin: 0 0 10px 0;
+      }
+    }
+
+    /* Very small devices */
+    @media (max-width: 350px) {
+      .container {
+        padding: 15px;
+      }
+      
+      h1 {
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -357,7 +412,7 @@
         </select>
 
         <label>Mobile Number</label>
-       <input type="tel" name="mobile" id="mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" required placeholder="10-digit mobile number">
+        <input type="tel" name="mobile" id="mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" required placeholder="10-digit mobile number">
 
         <label>Aadhar No or PAN No of owner</label>
         <input type="text" name="idnumber" required placeholder="Aadhar or PAN number">
@@ -444,168 +499,181 @@
     </form>
   </div>
 
-  <!-- JavaScript remains the same as in the original code -->
   <script>
-// Add input validation to prevent non-numeric characters
-  document.getElementById('mobile').addEventListener('input', function(e) {
-    // Remove any non-numeric characters
-    this.value = this.value.replace(/[^0-9]/g, '');
-    
-    // Limit to 10 characters
-    if (this.value.length > 10) {
-      this.value = this.value.slice(0, 10);
-    }
-  });
+    // Add input validation to prevent non-numeric characters
+    document.getElementById('mobile').addEventListener('input', function(e) {
+      // Remove any non-numeric characters
+      this.value = this.value.replace(/[^0-9]/g, '');
+      
+      // Limit to 10 characters
+      if (this.value.length > 10) {
+        this.value = this.value.slice(0, 10);
+      }
+    });
 
-  // Optional: Prevent paste of non-numeric content
-  document.getElementById('mobile').addEventListener('paste', function(e) {
-    const pastedData = e.clipboardData.getData('text');
-    if (!/^\d+$/.test(pastedData)) {
-      e.preventDefault();
-    }
-  });
+    // Optional: Prevent paste of non-numeric content
+    document.getElementById('mobile').addEventListener('paste', function(e) {
+      const pastedData = e.clipboardData.getData('text');
+      if (!/^\d+$/.test(pastedData)) {
+        e.preventDefault();
+      }
+    });
 
-
-
-
-
-    const applicantChoice=document.getElementsByName("applicantChoice");
-    const applicantNameInput=document.getElementById("applicantName");
-    applicantChoice.forEach(r=>r.addEventListener("change",()=>{
-      if(document.querySelector('input[name="applicantChoice"]:checked').value==="other"){
+    const applicantChoice = document.getElementsByName("applicantChoice");
+    const applicantNameInput = document.getElementById("applicantName");
+    applicantChoice.forEach(r => r.addEventListener("change", () => {
+      if (document.querySelector('input[name="applicantChoice"]:checked').value === "other") {
         applicantNameInput.classList.remove("hidden");
-      }else{
+      } else {
         applicantNameInput.classList.add("hidden");
-        applicantNameInput.value="";
+        applicantNameInput.value = "";
       }
     }));
-  
-    const propertyDetails=document.getElementById("propertyDetails");
-    propertyDetails.addEventListener("change",()=>{
+
+    const propertyDetails = document.getElementById("propertyDetails");
+    propertyDetails.addEventListener("change", () => {
       document.getElementById("coordFile").classList.add("hidden");
       document.getElementById("surveyText").classList.add("hidden");
       document.getElementById("revenueText").classList.add("hidden");
-      if(propertyDetails.value==="coords") document.getElementById("coordFile").classList.remove("hidden");
-      if(propertyDetails.value==="survey") document.getElementById("surveyText").classList.remove("hidden");
-      if(propertyDetails.value==="revenue") document.getElementById("revenueText").classList.remove("hidden");
+      if (propertyDetails.value === "coords") document.getElementById("coordFile").classList.remove("hidden");
+      if (propertyDetails.value === "survey") document.getElementById("surveyText").classList.remove("hidden");
+      if (propertyDetails.value === "revenue") document.getElementById("revenueText").classList.remove("hidden");
     });
-  
-    document.getElementById("agreeGuidelines").addEventListener("change",function(){
-      document.getElementById("paymentSection").classList.toggle("hidden",!this.checked);
+
+    document.getElementById("agreeGuidelines").addEventListener("change", function() {
+      document.getElementById("paymentSection").classList.toggle("hidden", !this.checked);
     });
-  
-    const districts={
-      AP:["Anantapur","Chittoor","East Godavari","Guntur","Krishna","Kurnool","Nellore","Prakasam","Srikakulam","Visakhapatnam","Vizianagaram","West Godavari","YSR Kadapa"],
-      TG:["Adilabad","Bhadradri Kothagudem","Hyderabad","Jagtial","Jangaon","Jayashankar Bhupalpally","Jogulamba Gadwal","Kamareddy","Karimnagar","Khammam","Komaram Bheem","Mahabubabad","Mahabubnagar","Mancherial","Medak","Medchal","Mulugu","Nagarkurnool","Nalgonda","Narayanpet","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Rangareddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal Rural","Warangal Urban","Yadadri Bhuvanagiri"]
-    };
-  
-    function loadDistricts(stateSelect,districtSelect){
-      const state=stateSelect.value;
-      districtSelect.innerHTML="<option value=''>Select District</option>";
-      if(districts[state]){
-        districts[state].forEach(d=>{
-          let opt=document.createElement("option");
-          opt.value=d;opt.textContent=d;
+
+    const districts = {
+  AP: [
+    "Anantapur", "Chittoor", "East Godavari", "Guntur", "Krishna",
+    "Kurnool", "YSR Kadapa", "Nellore (SPSR Nellore)", "Prakasam",
+    "Srikakulam", "Visakhapatnam", "Vizianagaram", "West Godavari",
+    "Anakapalli", "Alluri Sitharama Raju", "Kakinada",
+    "Konaseema", "Eluru", "NTR", "Palnadu", "Bapatla",
+    "Annamayya", "Sri Sathya Sai", "Tirupati", "Parvathipuram Manyam"
+  ],
+  TG: [
+    "Adilabad", "Bhadradri Kothagudem", "Hanumakonda", "Hyderabad",
+    "Jagtial", "Jangaon", "Jayashankar Bhupalpally", "Jogulamba Gadwal",
+    "Kamareddy", "Karimnagar", "Khammam", "Komaram Bheem Asifabad",
+    "Mahabubabad", "Mahabubnagar", "Mancherial", "Medak",
+    "Medchal–Malkajgiri", "Mulugu", "Nagarkurnool", "Nalgonda",
+    "Narayanpet", "Nirmal", "Nizamabad", "Peddapalli",
+    "Rajanna Sircilla", "Ranga Reddy", "Sangareddy", "Siddipet",
+    "Suryapet", "Vikarabad", "Wanaparthy", "Warangal Rural",
+    "Warangal Urban", "Yadadri Bhuvanagiri"
+  ]
+};
+
+
+    function loadDistricts(stateSelect, districtSelect) {
+      const state = stateSelect.value;
+      districtSelect.innerHTML = "<option value=''>Select District</option>";
+      if (districts[state]) {
+        districts[state].forEach(d => {
+          let opt = document.createElement("option");
+          opt.value = d;
+          opt.textContent = d;
           districtSelect.appendChild(opt);
         });
       }
     }
-    document.getElementById("comm_state").addEventListener("change",function(){
-      loadDistricts(this,document.getElementById("comm_district"));
+    document.getElementById("comm_state").addEventListener("change", function() {
+      loadDistricts(this, document.getElementById("comm_district"));
     });
-    document.getElementById("prop_state").addEventListener("change",function(){
-      loadDistricts(this,document.getElementById("prop_district"));
+    document.getElementById("prop_state").addEventListener("change", function() {
+      loadDistricts(this, document.getElementById("prop_district"));
     });
-  
-  
-    function toBase64(file){
-        return new Promise((resolve,reject)=>{
-          const reader=new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload=()=>resolve(reader.result.split(",")[1]);
-          reader.onerror=err=>reject(err);
+
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.split(",")[1]);
+        reader.onerror = err => reject(err);
+      });
+    }
+
+    // 🔹 SUBMIT HANDLER
+    document.getElementById("propertyForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const f = e.target;
+      const data = {
+        email: f.email.value,
+        ownername: f.ownername.value,
+        applicantChoice: f.applicantChoice.value,
+        applicantName: f.applicantChoice.value === "other" ? f.applicantName.value : "",
+        comm_house: f.comm_house.value,
+        comm_village: f.comm_village.value,
+        comm_mandal: f.comm_mandal.value,
+        comm_state: f.comm_state.value,
+        comm_district: f.comm_district.value,
+        mobile: f.mobile.value,
+        idnumber: f.idnumber.value,
+        propertyType: f.propertyType.value,
+        prop_house: f.prop_house.value,
+        prop_colony: f.prop_colony.value,
+        prop_village: f.prop_village.value,
+        prop_mandal: f.prop_mandal.value,
+        prop_state: f.prop_state.value,
+        prop_district: f.prop_district.value,
+        propertyDetails: f.propertyDetails.value,
+        surveyText: f.surveyText.value,
+        revenueText: f.revenueText.value,
+        briefRequest: f.briefRequest.value,
+        docSubmit: f.docSubmit.value
+      };
+
+      // Upload files
+      if (f.idfile.files.length > 0) {
+        let file = f.idfile.files[0];
+        data.idfile = await toBase64(file);
+        data.idfileName = file.name;
+        data.idfileType = file.type;
+      }
+
+      if (f.coordFile.files.length > 0) {
+        let file = f.coordFile.files[0];
+        data.coordFile = await toBase64(file);
+        data.coordFileName = file.name;
+        data.coordFileType = file.type;
+      }
+
+      data.documents = [];
+      for (let file of f.documents.files) {
+        data.documents.push({
+          data: await toBase64(file),
+          name: file.name,
+          type: file.type
         });
       }
-      
-      // 🔹 SUBMIT HANDLER
-      document.getElementById("propertyForm").addEventListener("submit", async function(e){
-        e.preventDefault();
-        const f = e.target;
-        const data = {
-          email: f.email.value,
-          ownername: f.ownername.value,
-          applicantChoice: f.applicantChoice.value,
-          applicantName: f.applicantChoice.value==="other" ? f.applicantName.value : "",
-          comm_house: f.comm_house.value,
-          comm_village: f.comm_village.value,
-          comm_mandal: f.comm_mandal.value,
-          comm_state: f.comm_state.value,
-          comm_district: f.comm_district.value,
-          mobile: f.mobile.value,
-          idnumber: f.idnumber.value,
-          propertyType: f.propertyType.value,
-          prop_house: f.prop_house.value,
-          prop_colony: f.prop_colony.value,
-          prop_village: f.prop_village.value,
-          prop_mandal: f.prop_mandal.value,
-          prop_state: f.prop_state.value,
-          prop_district: f.prop_district.value,
-          propertyDetails: f.propertyDetails.value,
-          surveyText: f.surveyText.value,
-          revenueText: f.revenueText.value,
-          briefRequest: f.briefRequest.value,
-          docSubmit: f.docSubmit.value
+
+      if (f.transactionCopy.files.length > 0) {
+        let file = f.transactionCopy.files[0];
+        data.transactionCopy = {
+          data: await toBase64(file),
+          name: file.name,
+          type: file.type
         };
-      
-        // Upload files
-        if(f.idfile.files.length>0){
-          let file=f.idfile.files[0];
-          data.idfile=await toBase64(file);
-          data.idfileName=file.name;
-          data.idfileType=file.type;
+      }
+
+      try {
+        let res = await fetch("https://script.google.com/macros/s/AKfycbxpv00KdU1DzYJTN4lUWiW4KsDhIoPDy4MWFTNkJ8egkkVTL9i_qlpyPC6eUwRg1AegAg/exec", {
+          method: "POST",
+          body: JSON.stringify(data)
+        });
+        let result = await res.json();
+        if (result.success) {
+          alert("✅ Submitted successfully! Your Reg ID is: " + result.id);
+          window.location.reload();
+        } else {
+          alert("❌ Error: " + result.error);
         }
-      
-        if(f.coordFile.files.length>0){
-          let file=f.coordFile.files[0];
-          data.coordFile=await toBase64(file);
-          data.coordFileName=file.name;
-          data.coordFileType=file.type;
-        }
-      
-        data.documents=[];
-        for(let file of f.documents.files){
-          data.documents.push({
-            data:await toBase64(file),
-            name:file.name,
-            type:file.type
-          });
-        }
-      
-        if(f.transactionCopy.files.length>0){
-          let file=f.transactionCopy.files[0];
-          data.transactionCopy={ 
-            data:await toBase64(file),
-            name:file.name,
-            type:file.type
-          };
-        }
-      
-        try{
-          let res=await fetch("https://script.google.com/macros/s/AKfycbxpv00KdU1DzYJTN4lUWiW4KsDhIoPDy4MWFTNkJ8egkkVTL9i_qlpyPC6eUwRg1AegAg/exec",{
-            method:"POST",
-            body:JSON.stringify(data)
-          });
-          let result=await res.json();
-          if(result.success){
-            alert("✅ Submitted successfully! Your Reg ID is: "+result.id);
-            window.location.reload();
-          } else {
-            alert("❌ Error: "+result.error);
-          }
-        }catch(err){
-          alert("❌ Submission failed: "+err.message);
-        }
-      });
+      } catch (err) {
+        alert("❌ Submission failed: " + err.message);
+      }
+    });
   </script>
 </body>
 </html>
