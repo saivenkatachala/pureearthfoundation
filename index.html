@@ -23,345 +23,66 @@
       --radius: 8px;
       --transition: all 0.3s ease;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Times New Roman', Times, serif; background: var(--light-bg); padding: 15px 10px; line-height: 1.6; color: var(--text); font-size: 16px; }
+    .container { max-width: 1100px; margin: auto; background: var(--card-bg); padding: 22px; border-radius: var(--radius); box-shadow: var(--shadow); transition: var(--transition); }
+    .container:hover { box-shadow: var(--shadow-hover); }
+    .logo-box { width: 100%; display:flex; justify-content:center; align-items:center; padding:0; margin:0 auto 6px auto; }
+    .logo { max-width: 180px; height:auto; transition: transform 0.2s ease; }
+    .logo:hover { transform: scale(1.02); }
+    h1 { text-align: center; color: var(--primary); margin: 8px 0 14px; font-size: 1.6rem; padding-bottom: 8px; position: relative; }
+    h1:after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 3px; background: var(--primary); border-radius: 3px; }
+    h3 { color: var(--accent); margin: 14px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); font-size: 1.25rem; }
+    p { text-align: justify; margin-bottom: 12px; color:#023e8a; font-size: 1.05rem; line-height: 1.3; }
+    form { margin-top: 6px; }
+    .form-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; align-items: start; }
+    .col-12 { grid-column: 1 / -1; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    .col-3 { grid-column: span 3; }
+    label { display:block; margin-top: 8px; font-weight: 600; color: var(--text); font-size: 1rem; }
+    input, select, textarea { width:100%; box-sizing:border-box; padding: 12px 12px; margin-top: 6px; border:1px solid var(--border); border-radius: var(--radius); font-size: 16px; transition: var(--transition); background: var(--card-bg); color: var(--text); }
+    input:focus, select:focus, textarea:focus { outline:none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,95,115,0.08); }
+    textarea { resize: vertical; min-height: 100px; }
+    .radio-group { margin-top: 8px; display:flex; flex-wrap:wrap; gap:12px; }
+    .radio-group label { display:inline-flex; align-items:center; margin-top:0; font-weight:normal; cursor:pointer; white-space:nowrap; }
+    .radio-group input { width:auto; margin-right:8px; }
+    .qr { display:block; margin:12px auto; max-width:200px; width:100%; border:1px solid var(--border); border-radius: var(--radius); padding: 10px; background: white; }
+    .hidden { display:none !important; }
+    .submit-btn { text-align:center; margin-top: 18px; grid-column: 1 / -1; }
+    .submit-btn button { background: var(--secondary); color:#fff; padding: 14px 36px; border:none; border-radius: var(--radius); font-size:1.05rem; font-weight:600; cursor:pointer; transition: var(--transition); box-shadow: 0 3px 8px rgba(0,0,0,0.1); max-width:320px; width:100%; }
+    .submit-btn button:hover { background: var(--secondary-dark); transform: translateY(-2px); box-shadow: 0 5px 12px rgba(0,0,0,0.15); }
+    .doc-note { margin-top:6px; font-size: 0.92rem; color: var(--text-light); font-style: italic; }
+    .guideline-box { margin: 12px 0; padding: 12px; background: #f8f9fa; border-radius: var(--radius); border-left: 4px solid var(--accent); }
+    .guideline-box label { display:inline-flex; align-items:center; font-size: 1rem; margin-top: 0; cursor: pointer; }
+    .guideline-box input { margin: 0 8px 0 0; width: auto; }
+    .readonly-field { color: var(--text-light); background-color: #f9f9f9; cursor: not-allowed; }
+    input[type="file"] { padding: 10px; background: #f8f9fa; border: 1px dashed var(--border); }
+    input[type="file"]::file-selector-button { background: var(--accent); color: white; padding: 8px 12px; border: none; border-radius: 4px; margin-right: 8px; cursor: pointer; }
+    input[type="file"]::file-selector-button:hover { background: #004957; }
+    @media (max-width: 900px) { .col-6 { grid-column: 1 / -1; } .col-4, .col-3 { grid-column: 1 / -1; } .submit-btn button { max-width: 100%; } .logo { max-width:150px; } }
+    /* small id/address specific layout */
+    .id-type-group { margin-bottom: 6px; grid-column: 1 / -1; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    .col-7 { grid-column: span 7; }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--light-bg);
-      padding: 15px 10px;
-      line-height: 1.6;
-      color: var(--text);
-      font-size: 16px; /* Base font size for mobile */
-    }
+    .form-grid { 
+  display: grid; 
+  grid-template-columns: repeat(12, 1fr); 
+  gap: 12px; 
+  align-items: start; 
+}
 
-    .container {
-      max-width: 850px;
-      margin: auto;
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
 
-    .container:hover {
-      box-shadow: var(--shadow-hover);
-    }
-
-    .logo-box {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0;
-      margin: 0 auto 5px auto;
-    }
-
-    .logo {
-      max-width: 180px;
-      height: auto;
-      transition: transform 0.2s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.02);
-    }
-
-    h1 {
-      text-align: center;
-      color: var(--primary);
-      margin: 10px 0 15px;
-      font-size: 1.6rem; /* Using rem for responsive sizing */
-      padding-bottom: 10px;
-      position: relative;
-    }
-
-    h1:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70px;
-      height: 3px;
-      background: var(--primary);
-      border-radius: 3px;
-    }
-
-    h3 {
-      color: var(--accent);
-      margin: 20px 0 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-      font-size: 1.3rem;
-    }
-
-    p {
-      text-align: justify;
-      margin-bottom: 20px;
-      color: var(--text);
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    form {
-      margin-top: 1px;
-    }
-
-    .form-section {
-      margin-bottom: 25px;
-      padding-bottom: 20px;
-      border-bottom: 1px dashed var(--border);
-    }
-
-    .form-section:last-of-type {
-      border-bottom: none;
-    }
-
-    label {
-      display: block;
-      margin-top: 18px;
-      font-weight: 600;
-      color: var(--text);
-      font-size: 1rem;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 14px 15px; /* Slightly larger for mobile touch */
-      margin-top: 8px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      font-size: 16px; /* Prevents zoom on iOS */
-      transition: var(--transition);
-      background: var(--card-bg);
-      color: var(--text);
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0, 95, 115, 0.1);
-    }
-
-    input:focus::placeholder {
-      color: transparent;
-    }
-
-    textarea { 
-      resize: vertical; 
-      min-height: 100px;
-    }
-
-    .radio-group { 
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap; /* Allows wrapping on small screens */
-      gap: 15px;
-    }
-
-    .radio-group label {
-      display: inline-flex;
-      align-items: center;
-      margin-top: 0;
-      font-weight: normal;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .radio-group input { 
-      width: auto; 
-      margin-right: 8px; 
-    }
-
-    .qr { 
-      display: block; 
-      margin: 20px auto; 
-      max-width: 200px; 
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 10px;
-      background: white;
-    }
-
-    .hidden { 
-      display: none !important; 
-    }
-
-    .submit-btn { 
-      text-align: center; 
-      margin-top: 30px; 
-    }
-
-    .submit-btn button {
-      background: var(--secondary);
-      color: #fff;
-      padding: 16px 40px;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      width: 100%; /* Full width on mobile */
-      max-width: 300px; /* But limit max width */
-    }
-
-    .submit-btn button:hover { 
-      background: var(--secondary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 12px rgba(0,0,0,0.15);
-    }
-
-    .doc-note { 
-      margin-top: 6px; 
-      font-size: 0.9rem; 
-      color: var(--text-light); 
-      font-style: italic; 
-    }
-
-    .guideline-box {
-      margin: 20px 0;
-      padding: 15px;
-      background: #f8f9fa;
-      border-radius: var(--radius);
-      border-left: 4px solid var(--accent);
-    }
-
-    .guideline-box label {
-      display: inline-flex;
-      align-items: center;
-      font-size: 1rem;
-      margin-top: 0;
-      cursor: pointer;
-    }
-
-    .guideline-box input {
-      margin: 0 8px 0 0;
-      width: auto;
-    }
-
-    .readonly-field {
-      color: var(--text-light);
-      background-color: #f9f9f9;
-      cursor: not-allowed;
-    }
-
-    ul {
-      padding-left: 20px;
-      margin: 15px 0;
-    }
-
-    li {
-      margin-bottom: 8px;
-      color: var(--text);
-      font-size: 1rem;
-    }
-
-    /* File input styling */
-    input[type="file"] {
-      padding: 12px;
-      background: #f8f9fa;
-      border: 1px dashed var(--border);
-    }
-
-    input[type="file"]::file-selector-button {
-      background: var(--accent);
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 4px;
-      margin-right: 12px;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-
-    input[type="file"]::file-selector-button:hover {
-      background: #004957;
-    }
-
-    /* Responsive design for tablets and larger phones */
-    @media (min-width: 481px) {
-      body {
-        padding: 15px 20px;
-        font-size: 16px;
-      }
-      
-      .container {
-        padding: 25px 30px;
-      }
-      
-      .submit-btn button {
-        width: auto;
-      }
-    }
-
-    /* Responsive design for desktop */
-    @media (min-width: 769px) {
-      body {
-        font-size: 16px;
-      }
-      
-      .container {
-        padding: 30px 35px;
-      }
-      
-      h1 {
-        font-size: 1.75rem;
-        margin: 15px 0 20px;
-      }
-      
-      input, select, textarea {
-        padding: 12px 15px;
-        font-size: 15px;
-      }
-    }
-
-    /* Responsive design for small mobile devices */
-    @media (max-width: 480px) {
-      .logo {
-        max-width: 150px;
-      }
-      
-      h1 {
-        font-size: 1.4rem;
-      }
-      
-      h3 {
-        font-size: 1.2rem;
-      }
-      
-      .radio-group {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      input[type="file"]::file-selector-button {
-        display: block;
-        width: 100%;
-        margin: 0 0 10px 0;
-      }
-    }
-
-    /* Very small devices */
-    @media (max-width: 350px) {
-      .container {
-        padding: 15px;
-      }
-      
-      h1 {
-        font-size: 1.3rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -370,166 +91,630 @@
       <img src="logo.png" class="logo" alt="Logo">
     </div>
     <h1>Registration Form for Property Status</h1>
-    <p>
-      Know the authentic ownership status of the land/house properties before sale or purchase for protecting your future transactions and to create a digital ownership locker - An initiation from Pure Earth Foundation to empower the property owners.
-    </p>
+    <p>Know the authentic ownership status of the land/house properties before sale or purchase for protecting your future transactions and to create a digital ownership locker - An initiation from Pure Earth Foundation to empower the property owners.</p>
 
-    <form id="propertyForm">
-      <div class="form-section">
-        <label>Email</label>
-        <input type="email" name="email" required placeholder="Enter your email address">
+    <form id="propertyForm" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off">
 
-        <label>Reg. No</label>
-        <input type="text" name="regno" value="Will be sent to your Email after registration." readonly class="readonly-field">
 
-        <label>Name of the property owner (with surname)</label>
-        <input type="text" name="ownername" required placeholder="Full name of property owner">
+      <div class="form-grid">
 
-        <label>Name of Applicant (with consent of owner)</label>
-        <div class="radio-group">
-          <label>
-            <input type="radio" name="applicantChoice" value="same" checked> Same as Owner
-          </label>
-          <label>
-            <input type="radio" name="applicantChoice" value="other"> Other
-          </label>
+        <!-- 1. Are Applicant and Property Owner the Same? -->
+        <div class="col-12">
+          <label>Name of the Applicant and Property Owner are same</label>
+          <div class="radio-group">
+            <label><input type="radio" name="ownerApplicant" value="same" checked> Same</label>
+            <label><input type="radio" name="ownerApplicant" value="different"> Different</label>
+          </div>
         </div>
-        <input type="text" name="applicantName" id="applicantName" class="hidden" placeholder="Enter Applicant Name">
-      </div>
 
-      <div class="form-section">
-        <label>Address for Communication</label>
-        <input type="text" name="comm_house" placeholder="HOUSE NO, STREET/ROAD">
-        <input type="text" name="comm_village" placeholder="VILLAGE/COLONY">
-        <input type="text" name="comm_mandal" placeholder="MANDAL/TOWN">
-        <select name="comm_state" id="comm_state">
-          <option value="">Select State</option>
-          <option value="AP">Andhra Pradesh</option>
-          <option value="TG">Telangana</option>
-        </select>
-        <select name="comm_district" id="comm_district">
-          <option value="">Select District</option>
-        </select>
-
-        <label>Mobile Number</label>
-        <input type="tel" name="mobile" id="mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" required placeholder="10-digit mobile number">
-
-        <label>Aadhar No or PAN No of owner</label>
-        <input type="text" name="idnumber" required placeholder="Aadhar or PAN number">
-
-        <label>Upload Aadhar or PAN</label>
-        <input type="file" name="idfile">
-      </div>
-
-      <div class="form-section">
-        <label>Property Type</label>
-        <select name="propertyType">
-          <option value="Land">Land</option>
-          <option value="House">House/Structure</option>
-        </select>
-
-        <label>Location/Address of the Property</label>
-        <input type="text" name="prop_house" placeholder="HOUSE NO/PLOT NO">
-        <input type="text" name="prop_colony" placeholder="NAME OF COLONY/LAYOUT">
-        <input type="text" name="prop_village" placeholder="VILLAGE/TOWN">
-        <input type="text" name="prop_mandal" placeholder="MANDAL/CITY">
-        <select name="prop_state" id="prop_state">
-          <option value="">Select State</option>
-          <option value="AP">Andhra Pradesh</option>
-          <option value="TG">Telangana</option>
-        </select>
-        <select name="prop_district" id="prop_district">
-          <option value="">Select District</option>
-        </select>
-
-        <label>Property Details</label>
-        <select name="propertyDetails" id="propertyDetails">
-          <option value="">Select</option>
-          <option value="coords">HAVE COORDINATES OF THE PROPERTY</option>
-          <option value="noCoords">DON'T HAVE COORDINATES OF THE PROPERTY</option>
-          <option value="survey">SURVEY NO/TOWN SURVEY NO</option>
-          <option value="revenue">NAME OF Revenue Village/Block & Ward</option>
-        </select>
-        <input type="file" name="coordFile" id="coordFile" class="hidden">
-        <input type="text" name="surveyText" id="surveyText" class="hidden" placeholder="Enter Survey No">
-        <input type="text" name="revenueText" id="revenueText" class="hidden" placeholder="Enter Revenue Village/Block & Ward">
-
-        <label>Brief Description of Request</label>
-        <textarea name="briefRequest" placeholder="Please describe your request in detail"></textarea>
-      </div>
-
-      <div class="form-section">
-        <label>Are you submitting any documents?</label>
-        <select name="docSubmit">
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-
-        <label>Upload Documents</label>
-        <p class="doc-note">
-          (Copy of Sale Deed / Agreement of Sale / Pattadhar Pass Book Pages / Any Other Proof of Ownership)
-        </p>
-        <input type="file" name="documents" multiple>
-
-        <h3>Guidelines</h3>
-        <ul>
-          <li>Please ensure all details are correct before submission.</li>
-          <li>Provide valid proofs for smooth processing.</li>
-          <li>Registration fee is non-refundable.</li>
-        </ul>
         
-        <div class="guideline-box">
-          <label for="agreeGuidelines">
-            <input type="checkbox" id="agreeGuidelines">I agree to the above guidelines
-          </label>
+
+        <!-- Name fields -->
+      
+        <div class="col-12" id="ownerNameWrapper">
+            <label for="ownername">Name</label>
+            <input type="text" name="ownername" id="ownername" placeholder="Enter full name" required minlength="4"  autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <small class="error-msg" id="ownernameError" style="color:red; display:none;">Name must be at least 4 characters.</small>
+          </div>
+          
+          <div class="col-6 hidden" id="applicantWrapper">
+            <label for="applicantName">Applicant Name</label>
+            <input type="text" name="applicantName" id="applicantName" placeholder="Enter Applicant Name" minlength="4"  autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <small class="error-msg" id="applicantNameError" style="color:red; display:none;">Applicant Name must be at least 4 characters.</small>
+          </div>
+          
+          <div class="col-6 hidden" id="ownerWrapper">
+            <label for="ownerNameDiff">Owner Name</label>
+            <input type="text" name="ownerNameDiff" id="ownerNameDiff" placeholder="Enter Owner Name" minlength="4" autocomplete="off">
+            <small class="error-msg" id="ownerNameDiffError" style="color:red; display:none;">Owner Name must be at least 4 characters.</small>
+          </div>
+          <!-- Name fields -->
+
+        <!-- 2. Address for Communication (6 + 6 split layout) -->
+        <div class="col-12"><h3>Address for Communication</h3></div>
+
+        <div class="col-6">
+          <label for="comm_house">House No</label>
+          <input type="text" name="comm_house" id="comm_house" placeholder="HOUSE NO" autocomplete="off">
+        </div>
+        <div class="col-6">
+          <label for="comm_street">Street / Road</label>
+          <input type="text" name="comm_street" id="comm_street" placeholder="STREET / ROAD" autocomplete="off">
         </div>
 
-        <div id="paymentSection" class="hidden">
+        <div class="col-6">
+          <label for="comm_village">Village / Colony</label>
+          <input type="text" name="comm_village" id="comm_village" placeholder="VILLAGE / COLONY" autocomplete="off">
+        </div>
+
+        <div class="col-6">
+          <label for="comm_state">State</label>
+          <select name="comm_state" id="comm_state">
+            <option value="">Select</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="TG">Telangana</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label for="comm_district">District</label>
+          <select name="comm_district" id="comm_district">
+            <option value="">Select</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label for="comm_mandal">Mandal</label>
+          <select name="comm_mandal" id="comm_mandal">
+            <option value="">Select</option>
+          </select>
+        </div>
+
+        <!-- 3. Mobile and 4. Email -->
+        <div class="col-6">
+          <label for="mobile">Mobile Number</label>
+          <input type="tel" name="mobile" id="mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" required placeholder="10-digit mobile number"   autocomplete="off">
+        </div>
+
+        <div class="col-6">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required placeholder="Enter your email address"  autocomplete="off">
+            <small class="error-msg" id="emailError" style="color:red; display:none;">Please enter a valid email address (example: example@domain.com)</small>
+          </div>
+          
+
+        <!-- 5. Property Type -->
+        <div class="col-12">
+          <label>Property Type</label>
+          <select name="propertyType" id="propertyType">
+            <option value="">Select Property Type</option>
+            <option value="Land">Land / Plot</option>
+            <option value="House">House / Structure</option>
+          </select>
+        </div>
+
+        <!-- 6. Location Address of Property -->
+        <div class="col-12"><h3>Location / Address of the Property</h3></div>
+
+        <div class="col-6">
+          <label for="prop_house">House / Plot No</label>
+          <input type="text" name="prop_house" id="prop_house" placeholder="HOUSE NO / PLOT NO">
+        </div>
+
+        <div class="col-6">
+          <label for="prop_colony">Name of Colony / Layout</label>
+          <input type="text" name="prop_colony" id="prop_colony" placeholder="COLONY / LAYOUT">
+        </div>
+
+        <div class="col-6">
+          <label for="prop_village">Village / Town</label>
+          <input type="text" name="prop_village" id="prop_village" placeholder="VILLAGE / TOWN">
+        </div>
+
+        <div class="col-6">
+          <label for="prop_state">State</label>
+          <select name="prop_state" id="prop_state">
+            <option value="">Select</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="TG">Telangana</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label for="prop_district">District</label>
+          <select name="prop_district" id="prop_district">
+            <option value="">Select</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label for="prop_mandal">Mandal</label>
+          <select name="prop_mandal" id="prop_mandal">
+            <option value="">Select</option>
+          </select>
+        </div>
+
+        <!-- 7. Property Details -->
+        <div class="col-12">
+  <label>Property Details</label>
+  <select name="propertyDetails" id="propertyDetails">
+    <option value="">Select</option>
+    <option value="coords">HAVE COORDINATES OF THE PROPERTY</option>
+    <option value="noCoords">DON'T HAVE COORDINATES OF THE PROPERTY</option>
+    <option value="survey">SURVEY NO/TOWN SURVEY NO</option>
+    <option value="revenue">NAME OF Revenue Village/Block & Ward</option>
+  </select>
+</div>
+
+<div class="col-12">
+  <input type="file" name="coordFile" id="coordFile" class="hidden" accept=".pdf">
+  <small id="coordMessage" style="color:#555; font-size:0.9rem;" class="hidden">Only PDF files are accepted</small>
+
+  <input type="text" name="surveyText" id="surveyText" class="hidden" placeholder="Enter Survey No">
+  <input type="text" name="revenueText" id="revenueText" class="hidden" placeholder="Enter Revenue Village/Block & Ward">
+</div>
+
+
+        <!-- 8. Brief Description -->
+        <div class="col-12">
+            <label for="briefRequest">Brief Description of Request</label>
+            <textarea name="briefRequest" id="briefRequest" placeholder="Please describe your request in detail" rows="5"></textarea>
+            <small class="error-msg" id="briefRequestError" style="color:red; display:none;">
+              Please enter at least 100 characters.
+            </small>
+          </div>
+
+        <!-- 10. Upload Documents -->
+        <div class="col-12">
+            <label>Upload Documents</label>
+            <p class="doc-note">(ANY ONE OF THE COPY OF SALE DEED / AGREEMENT OF SALE / PATTADHAR PASS BOOK PAGES / ANY OTHER PROOF OF OWNERSHIP.)</p>
+            <input type="file" name="documents" id="documents" multiple accept=".pdf">
+            <small style="color:#555; font-size:0.9rem;">Please upload PDF files only</small>
+          </div>
+        <!-- 11. SELECT ID (dropdown + upload according to selection) -->
+        <!-- <div class="col-6 id-type-group">
+          <label for="idSelect">Identity Proof</label>
+          <select id="idSelect" name="idSelect" required>
+            <option value="">Select</option>
+            <option value="pan">PAN</option>
+            <option value="tele">Telephone Bill</option>
+            <option value="elec">Electricity Bill</option>
+            <option value="voter">Voter ID</option>
+            <option value="dl">Driving Licence</option>
+          </select>
+        </div> -->
+          <div class="col-6 id-type-group">
+            <label for="idSelect">Identity Proof</label>
+            <select id="idSelect" name="idSelect" required>
+              <option value="">Select</option>
+              <option value="pan">PAN</option>
+              <option value="tele">Telephone Bill</option>
+              <option value="elec">Electricity Bill</option>
+              <option value="voter">Voter ID</option>
+              <option value="dl">Driving Licence</option>
+            </select>
+          </div>
+          
+          <div class="col-6" id="idUploadWrapper" style="display:none">
+            <label id="idUploadLabel">Upload ID Document (PDF only)</label>
+            <input type="file" id="idUpload" name="idUpload" accept=".pdf">
+            <small style="color:#555; font-size:0.9rem;">Only PDF files are accepted</small>
+          </div>
+          
+          
+
+        
+        <!-- Guidelines -->
+        <div class="col-12">
+          <h3>Guidelines</h3>
+          <ul>
+            <li>Please ensure all details are correct before submission.</li>
+            <li>Provide valid proofs for smooth processing.</li>
+            <li>Registration fee is non-refundable.</li>
+          </ul>
+          <div class="guideline-box">
+            <label for="agreeGuidelines"><input type="checkbox" id="agreeGuidelines"> I agree to the above guidelines</label>
+          </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div id="paymentSection" class="col-12 hidden">
           <label>Registration/User charges (INR 2000/-)</label>
           <p>You can pay the registration fee by scanning the QR code below:</p>
           <img src="qr.jpg" alt="QR Code" class="qr">
           <label>Upload the Transaction Copy</label>
-          <input type="file" name="transactionCopy">
-        </div>
-      </div>
+          <input type="file" name="transactionCopy" id="transactionCopy" accept=".pdf">
+          <small style="color:#555; font-size:0.9rem;">Only PDF files are accepted</small>
+        </div>        
 
-      <div class="submit-btn">
-        <button type="submit">Submit</button>
+        <div class="submit-btn">
+          <button type="submit" id="submitBtn">Submit</button>
+        </div>
+
       </div>
     </form>
   </div>
 
   <script>
-    // Add input validation to prevent non-numeric characters
-    document.getElementById('mobile').addEventListener('input', function(e) {
-      // Remove any non-numeric characters
-      this.value = this.value.replace(/[^0-9]/g, '');
-      
-      // Limit to 10 characters
-      if (this.value.length > 10) {
-        this.value = this.value.slice(0, 10);
-      }
-    });
 
-    // Optional: Prevent paste of non-numeric content
-    document.getElementById('mobile').addEventListener('paste', function(e) {
-      const pastedData = e.clipboardData.getData('text');
-      if (!/^\d+$/.test(pastedData)) {
-        e.preventDefault();
-      }
-    });
+const emailEl = document.getElementById('email');
+const emailError = document.getElementById('emailError');
 
-    const applicantChoice = document.getElementsByName("applicantChoice");
-    const applicantNameInput = document.getElementById("applicantName");
-    applicantChoice.forEach(r => r.addEventListener("change", () => {
-      if (document.querySelector('input[name="applicantChoice"]:checked').value === "other") {
-        applicantNameInput.classList.remove("hidden");
+emailEl.addEventListener('input', function() {
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if(this.value && !regex.test(this.value)) {
+    emailError.style.display = 'block';
+  } else {
+    emailError.style.display = 'none';
+  }
+});
+
+
+function setupInlineValidation(inputEl, errorEl) {
+  inputEl.addEventListener('input', function() {
+    if (this.value && this.value.length < 4) {
+      errorEl.style.display = 'block';
+    } else {
+      errorEl.style.display = 'none';
+    }
+  });
+}
+
+// Apply validation to all name inputs
+setupInlineValidation(document.getElementById('ownername'), document.getElementById('ownernameError'));
+setupInlineValidation(document.getElementById('applicantName'), document.getElementById('applicantNameError'));
+setupInlineValidation(document.getElementById('ownerNameDiff'), document.getElementById('ownerNameDiffError'));
+
+
+
+const briefRequestEl = document.getElementById('briefRequest');
+const briefRequestError = document.getElementById('briefRequestError');
+
+briefRequestEl.addEventListener('input', function() {
+  if(this.value.length > 0 && this.value.length < 100) {
+    briefRequestError.style.display = 'block';
+  } else {
+    briefRequestError.style.display = 'none';
+  }
+});
+
+
+
+    // Districts and Mandals setup
+    const districts = {
+  AP: ["Alluri Sitharama Raju","Anakapalli","Anantapur","Annamayya","Bapatla","Chittoor","Dr. B. R. Ambedkar Konaseema District","East Godavari","Eluru","Guntur","Krishna","Kakinada","Kurnool","NTR","Palnadu","Parvathipuram Manyam","Prakasam","Srikakulam","Sri Sathya Sai","Tirupati","Visakhapatnam","Vizianagaram","West Godavari","YSR Kadapa","Nellore"].sort(),
+  TG: ["Adilabad","Bhadradri Kothagudem","Hanumakonda","Hyderabad","Jagtial","Jangaon","Jayashankar Bhupalpally","Jogulamba Gadwal","Kamareddy","Karimnagar","Khammam","Komaram Bheem Asifabad","Mahabubabad","Mahabubnagar","Mancherial","Medak","Medchal–Malkajgiri","Mulugu","Nagarkurnool","Nalgonda","Narayanpet","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Ranga Reddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal Rural","Warangal Urban","Yadadri Bhuvanagiri"].sort()
+};
+
+// Example realistic mandals (partial)
+const mandalsMap = {
+  AP: {
+    "Alluri Sitharama Raju": [
+  "Addateegala","Ananthagiri","Chintoor","Chinthapalli","Devipatnam","Dumbriguda","Gangavaram","G.K.Veedhi",
+  "G.Madugula","Hukumpeta","Koyyuru","Kunavaram","Maredumilli","Munchingput","Nellipaka","Paderu","Pedabayulu",
+  "Rajavommangi","Rampachodavaram","Vararamachandrapuram","Y.Ramavaram"
+],
+    "Anakapalli": [
+  "Anakapalli","Atchutapuram","Butchiahpeta","Cheedikada","Chodavaram","Devarapalli","Elamanchili","Golugonda",
+  "Kasimkota","K.Kotapadu","Kotauratla","Madugula","Makavarapalem","Munagapaka","Nakkapalli","Narsipatnam",
+  "Nathavaram","Parawada","Payakaraopeta","Rambilli","Ravikamatham","Rolugunta","Sabbavaram","S.Rayavaram"
+],
+
+"Anantapur": [
+  "Amadaguru","Anantapur","Atmakur","Bathalapalle","Beluguppa","Bommanahalli","Bukkapatnam","Bukkarayasamudram","Chenne Kothapalle",
+  "Chilamathur","Dharmavaram","D.Hirchala","Garladinne","Gandla Penta","Gooty","Gummagatta","Kadiri","Kanaganapalle","Kanekal",
+  "Kalyandurg","Kambadur","Kudair","Kothacheruvu","Mudigubba","Nambulipulikunta","Nallacheruvu","Nallamada","Narpala","Obuladevaracheruvu",
+  "Pamidi","Penu Konda","Pedda Pappur","Peddavadugur","Puttaparthi","Ramagiri","Rapthadu","Rayadurg","Roddam","Settur","Somandepalle",
+  "Talupula","Tanakal","Tadipatri","Tadimarri","Yadiki","Yellanur"
+].sort(),
+
+"Annamayya": [
+  "B.Kothakota","Chinnamandem","Chitvel","Galiveedu","Gurramkonda","K.V.Palli","Kalikiri","Kalkada","Kodur","Kurabalakota","Lakkireddypalli","Madanapalle","Mulakalacheruvu","Nandalur","Nimmanapalle","Obulavaripalli",
+  "Peddamandyam","Peddathippasamudram","Penagalur","Pileru","Pullampeta","Rajampet","Ramapuram","Ramasamudram", "Rayachoti","Sambepalli","Thamballapalle","Tsundupalli","Vayalpad","Veeraballi"
+],
+
+"Bapatla": [
+  "Addanki","Amruthalur","Ballikurava","Bapatla","Bhattiprolu","Cherukupalle","Chinaganjam","Chirala","Inkollu","Janakavarampanguluru","Karlapalem","Karamchedu","Kollur","Korisapadu","Martur","Nagaram",
+  "Nizampatnam","Parchur","Pittalavanipalem","Repalle","Santhamaguluru","Tsundur","Vemuru","Vetapalem","Yeddanapudi"
+],
+  "Chittoor": [ "Baireddipalle", "Bangarupalyam", "Chittoor Rural", "Chittoor Urban", "Chowdepalle", "Gangadhara Nellore", "Gangavaram", "Gudipala", "Gudupalle","Irala","Karvetinagar","Kuppam","Nagari","Nindra","Palamaner","Palasamudram","Peddapanjani","Penumuru","Puthalapattu","Ramakuppam",
+    "Santhipuram","Srirangarajapuram","Thavanampalle","Vedurukuppam","Venkatagirikota","Vijayapuram","Yadamari"
+  ],
+
+"Dr. B. R. Ambedkar Konaseema District": ["Ainavilli","Alamuru","Allavaram","Amalapuram","Ambajipeta","Atreyapuram","I. Polavaram","K. Gangavaram","Kapileswarapuram","Katrenikona","Kothapeta","Malikipuram","Mandapeta","Mamidikuduru","Mummidivaram",
+  "P. Gannavaram","Ramachandrapuram","Razole","Ravulapalem","Rayavaram","Sakhinetipalle","Uppalaguptam"
+],
+
+
+"East Godavari": [
+  "Addateegala","Alamuru","Amalapuram","Ambajipeta","Anaparthi","Atreyapuram","Biccavolu","Gajuwaka","Gangavaram","Gokavaram", "Gollaprolu","Kajuluru","Kadiam","Kakinda (Rural)","Kakinada (Urban)","Kapileswarapuram","Karapa","Katrenikona","Kothapalle",
+  "Kothapeta","Korukonda","Maredumilli","Mandapeta","Mamidikuduru","Malikipuram","P Gannavaram","Pedapudi","Pithapuram","Peddapuram", "Rajanagaram","Rajahmundry (Rural)","Rajahmundry (Urban)","Rajavommangi","Ramachandrapuram","Rampachodavaram","Rangampeta",
+  "Razole","Sakhinetipalle","Samalkota","Seethanagaram","Thallarevu","Thondangi","Tuni","Uppalaguptam","Yeletwaram","Y Ramavaram","Gandepalle"
+].sort(),
+
+"Eluru": [
+  "Agiripalli","Bhimadole","Buttaigudem","Chatrai","Chintalapudi","Denduluru","Eluru","Ganapavaram", "Jeelugumilli","Jangareddygudem","Kaikaluru","Kalidindi","Kamavarapukota","Koyyalagudem","Kukunoor",
+  "Lingapalem","Mandavalli","Mudinepalle","Musunuru","Nidamarru","Nuziveedu","Pedapadu","Pedavegi","Polavaram","T. Narasapuram","Unguturu","Velairpad"
+],
+
+"Guntur": [
+  "Achampeta","Amaravathi","Amruthalur","Bapatla","Bellamkonda","Bhattiprolu","Bollapalle","Cherukupalle","Chebrole","Chilakaluripet","Dachepalle","Duggirala","Durgi","Edlapadu","Guntur","Gurazala","Ipuru","Kakumanu","Karlapalem","Karempudi",
+  "Kollipara","Kollur","Krosuru","Machavaram","Macherla","Mangalagiri","Medikonduru","Muppalla","Nadendla","Nakarikallu","Nagaram","Narasarapet","Nuzendla","Nizampatnam","Pedakakanig","Pedanandipadu","Pedakurapadu","Phirangipuram","Ponnu","Prathipadu",
+  "Rajupalem","Repalle","Rompicherla","Savalayapuram","Sattenapalle","Tadikonda","Tenali","Thullur","Tsundur","Vatticherukuru","Vemuru","Velddurthi","Vinukonda","Pittalavanipalem"
+],
+"Kakinada": [
+  "Gandepalli", "Gollaprolu","Jaggampeta", "Kajuluru","Kakinada (R)","Kakinada (U)","Karapa","Kirlampudi","Kotananduru","Peddapuram","Pedapudi","Pithapuram","Prathipadu",
+"Rowtulapudi","Samalkota","Shankhavaram","Tuni","Thallarevu","Thondangi","U.Kotapalli","Yeleswaram"
+],
+"Krishna": [
+  "A Konduru","Agiripalle","Avanigadda","Bantumilli","Bapulapadu","Challapalli","Chatrai","Chandarlapadu","G Konduru","Gampalagudem","Gannavaram","Ghantasala","Gudivada","Gudur","Gudlavalleru","Ibrahimpatnam","Jaggayyapeta","Kaikalur","Kalidindi","Kanchikacherla",
+  "Kankipadu","Koduru","Machilipatnam","Mopidevi","Movva","Mudinepalli","Mandavalli","Mylavaram","Nagayalanka","Nandigama","Nandivada","Nuzvid","Pamarru","Pamidimukkala","Penamaluru","Penuganchiprolu","Pedanadu","Pedaparupudi","Thotlavalluru","Tiruvuru",
+  "Unguturu","Vatsavai","Vijayawada Rural","Vijayawada Urban","Vissannapet","Vuayyuru"
+],
+"Kurnool": [
+  "Adoni","Allagadda","Alur","Aspari","Atmakur","Bandi Atmakur","Banaganapalle","Bethamcherla","C.Belagalla","Chagalamarri", "Chippagiri","Dhone","Dornipadu","Gadivemula","Gonegandla","Gospa","Gudur","Halaharvi","Jupadu Bungalow","Kallur",
+  "Kodumur","Koilkuntla","Kosigi","Kowthalam","Kurnool","Mahanandi","Maddirera East","Mantralayam","Midthur","Nandyal", "Nandavaram","Nandi Kotkur","Owk","Orvakal","Panyam","Pagidyal","Pamulapadu","Peapally","Pattikanda","Sanjamala",
+  "Sirvel","Srisailam","Tuggal","Uyyalawada","Velgodu","Veldurthi","Yemmiganur","Pedda Kadubur"
+],
+"NTR": [
+    "A Konduru","Chandarlapadu","Gampalagudem","G Konduru","Ibrahimpatnam","Jaggaiahpeta","Kanchikacherla","Mylavaram","Nandigama","Penuganchiprolu","Reddigudem",
+    "Tiruvuru", "Vatsavai","Veerullapadu","Vijayawada Rural","Vijayawada Central","Vijayawada East","Vijayawada North","Vijayawada West","Vissannapeta"
+  ],
+  "Palnadu": [
+    "Chilakaluripet","Edlapadu","Ipur","Nadendla","Narasaraopet","Nuzendla","Rompicherla","Savalyapuram","Vinukonda","Amaravathi","Atchampet","Bellamkonda","Krosuru",
+    "Muppalla","Nekarikallu","Pedakurapadu","Rajupalem","Sattenapalli","Bollapalli","Dachepalli","Durgi","Gurazala","Karempudi","Machavaram","Macherla","Piduguralla","Rentachintala", "Veldurthi"
+  ].sort(),
+"Parvathipuram Manyam": ["Veeraghattam","Gummalakshmipuram","Kurupam","Jiyyammavalasa","Garugubilli","Parvathipuram","Makkuva","Seethanagaram",
+    "Balijipeta","Salur","Pachipenta","Mentada","Palakonda","Seethampeta","Bhamini"
+  ].sort(),
+"Prakasam": [
+  "Addanki","Ardhaveedu","Ballikurava","Bestavaripeta","ChandraSekarapuram","Chirala","Chimakurthi","Chinaganjam","Cumbum","Darsip","Donakonda","Dornala","Inkollu","Giddalur","Gudlur","Hanumanthunipadu","Janakavaram Panguluru","Kanigiri",
+  "Kandukur","Karamchedu","Komarolu","Konakanamitla","Korisapadu","Lingasamudram","Maddipadu","Markapur","Martur", "Marripudi","Mundlamuru","Naguluppalapadu","Ongole","Parchur","Pamur","Pedacherlopalle","Peda Araveedu","Ponnaluru",
+  "Racherla","Santhanuthlapadu","Santhamaguluru","Tangutur","Tarlapadu","Thallur","Veligandla","Vetapalem","Voletivaripalem", "Yeddanapudi","Yerragondapalem","Zarugumilli"
+],
+"Sri Sathya Sai": ["AGALI","AMADAGUR","AMARAPURAM","BATHALAPALLE","BUKKAPATNAM","CHENNEKOTHAPALLI","CHILAMUTHUR","DHARMAVARAM","GANDLAPENTA","GORANTLA",
+    "GUDIBANDA","HINDUPUR","KADIRI","KANAGAPALLI","KOTHACHERUVU","LEPAKSHI","MADAKASIRA","MUDIGUBBA","NALLACHERUVU","NALLAMADA","NAMBULAPULAKUNTA","OUBULADEVARACHERUVU",
+  "PARIGI", "PENUKONDA", "PUTTAPARTHI", "RAMAGIRI", "RODDAM", "ROLLA", "SOMMANDEPALLI", "TADIMARRI", "TALUPULA", "TANAKAL"
+  ],
+  
+  "Nellore": [
+  "Allur","Ananthasagaram","Anumasamudrampeta","Atmakur","Balayapalle","Bogole","Butchireddipalem","Chilla","Chejerla","Chittamuru","Dakili","Dagadarthi","Doravarisatram","Duttaluru","Gudur","Indukurpet","Jaladanki","Kaligiri","Kaluvoay",
+  "Kondapuram","Kotam","Kovur","Manubolu","Marripadu","Muthukur","Ojili","Pellakur","Podlakur","Rapur","Seetharamapuram","Sangam","Sullurpeta","Thotapalligudur","Udayagiri","Vakadu","Varikuntapadu","Venkatagiri","Venkatachelam","Vinjamur","Vidavaluru","Sydapuram","Nellore"
+],
+
+"Srikakulam": ["Amadalavalasa","Bhamini","Burja","Etcherla","Garasa","Ganguvari Singadam","Hiramandalam","Ichchapuram","Jalumuru","Kanchili","Kaviti","Kothuru","Mandasa","Meilaputti","Narasannapeta","Nandigam","Pathapatnam","Polaki","Santhabommali","Santhakaviti","Seethampeta","SriKakulam","Tekkal","Vajrampukothuru","Veeraghattam","Palasa","Palakonda","Sarubujjili","Saravakota"],
+"Visakhapatnam": ["Anakapalli","Ananthagiri","Anandapuram","Araku Valley","Atchutapuram","Bheemunipatnam","Butchayyapeta","Cheedikada","Chodavaram",
+  "Chintapalle","Dumbriguda","Devarapalle","Gajuwaka","Gangaraju Madugula","Gudem Kothaveedhi","Golugonda","Hukumpeta","Kasimkota",
+  "K Kotauratla","K Kotapadu","Koyyuru","Makavarapalem","Madugula","Munagapaka","Munchingiputtu","Nakkapalli","Narsipatnam",
+  "Nathavaram","Padmanabham","Paderu","Paravada","Payakaraopeta","Pedagantyada","Pedabayalu","Rambilli","Ravikamatham",
+  "Rolugunta","Sabbavaram","S Rayavaram","Visakhapatnam","Visakhapatnam(U)","Yelamanchili"
+],
+"Tirupati": [
+    "BALAYAPALLI","BUCHINAIDU KHANDRIGA","CHILLAKUR","CHINNAGOTTIGALLU","CHITTAMUR","DAKKILI","DORAVARISATRAM","GUDUR","K V B PURAM","KOTA","NAIDUPET","NAGALAPURAM",
+    "NARAYANAVANAM","OZILI","PAKALA","PELLAKUR","PICHATUR","PUTUR","RAMACHANDRAPURAM","RENIGUNTA","SATYAVEDU","SRIKALAHASTI","SULLURUPETA","TADA","THOTTAMBEDU","TIRUPATI",
+    "TIRUPATI RURAL","VADAMALAPETA","VAKADU","VARADAIAHPALEM","VENKATAGIRI","YERPEDU","YERRAVARIPALEM"
+  ],
+"Vizianagaram": ["Badangi","Balajipeta","Bhogapuram","Bobbili","Bondapalle","Cheepurupalle","Dattirajeru","Denka","Garividi","Garugubilli","Gummalakshmipuram","Gurla","Gantyada","Jami","Jiymma Valasa","Kothavalasa","Kurupam","Lakkavarapukota","Makkuva","Mentada","Merakamudidam","Nellimarla","Parvathipuram","Pachipenta","Pusapatirega","Ramabhadrapuram","Salur","Seethanagaram","Therlam","Vepada","Vizianagaram","Srungavarapukota"],
+"YSR Kadapa": [
+  "Atlur","B.Kodur","Badvel","Brahmamgarimatham","Chakrayapet","Chapadu","Chennur","Chinnamandem","Chinthakomma Dinne","Chitvel","Duvvur","Galiveedu","Gopavaram","Jammalamadugu","Kadapa","Kalasapadu","Kamalapuram","Khajipet","Koduru",
+  "Kondapuram","Lakkireddipalle","Lingala","Muddanur","Mydukur","Mylavaram","Nandalur","Obulavaripalle","Peddamudium","Penagalur","Pendlimarri","Porumamilla","Proddatur","Pulivendula","Pullampeta","Rajampet","Rajupallem","Ramapuram",
+  "Rayachoti","Sambepalle","Sidhout","Simhadripuram","Sri Avadhuth Kasinayana","T.Sundupalle","Thondur","Vallur","Veeraballi","Veerapanayapalle","Vempalle","Vemula","Vontimitta","Yerraguntla"
+], 
+  },
+
+
+
+  TG: {
+  "Adilabad": [
+    "Adilabad","Asifabad","Bazarhathnoor","Bejjur","Bela","Bellampalle","Bhainsa","Bhimini","Boath","Chennur","Dahegaon","Dandepalle","Dilawarpur","Gudihathnoor","Ichoda",
+    "Inderavelly","Jainad","Jainoor","Jaipur","Jannaram","Kaddam (Peddur)","Kagaznagar","Kasipet","Kerameri","Khanapur","Kotapalle","Kouthala","Kubeer","Kuntala",
+    "Laxmanchanda","Lokeshwaram","Luxettipet","Mamda","Mancherial","Mandamarri","Mudhole","Narnoor","Nennal","Neradigonda","Nirmal","Rebbana","Sarangapur","Sirpur",
+    "Sirpur (T)","Talamadugu","Tamsi","Tandur","Tanoor","Tiryani","Utnoor","Vemanpalle","Wankdi"
+  ],
+  "Bhadradri Kothagudem": ["Allapalli","Annapureddypalli","Aswapuram","Aswaraopeta","Bhadrachalam","Burgampahad","Chandrugonda","Cherla",
+    "Chunchupalli","Dammapeta","Dummugudem","Gundala","Julurpad","Karakagudem","Kothagudem","Laxmidevipalli","Manuguru","Mulkalapally","Palvancha","Pinapaka",
+    "Sujathanagar","Tekulapalli","Yellandu"
+  ],
+"Hanumakonda": ["Athmakur","Bheemadevarapalli","Damera","Dharmasagar","Elkathuthi","Hanamkonda","Hasanparthy","Inavolu","Kamalapur","Khaazipet","Nadikuda","Parkal","Shayampet","Velair"
+  ],
+  "Hyderabad": ["Amberpet","Himayatnagar","Nampally","Asifnagar","Saidabad","Bahadurpura","Bandlaguda","Golconda","Charminar","Ameerpet","Tirumalagiri","Maredpally",
+    "Shaikpet","Khairatabad","Secunderabad","Musheerabad"
+  ].sort(),
+  "Jagtial": ["Beerpur","Buggaram","Dharmapuri","Endapalli","Gollapalli","Jagitial Urban","Jagitial Rural","Kodimial","Mallial","Pegadapalli",
+    "Raikal","Sarangapur","Velgatoor","Metpally","Ibrahimpatnam","Mallapur","Kathalapur","Korutla","Medipalli","Bhemaram"
+  ],
+  "Jangaon": [ "Jangaon", "Lingala Ghanpur", "Bachannapet", "Devaruppula", "Narmetta", "Tharigoppula", "Raghunathpally", "Ghanpur (Stn)",
+    "Chilpur","Zaffergadh","Palakurthy","Kodakandla"
+  ].sort(),
+  "Jayashankar Bhupalpally": ["Bhupalpally","Mahadevpur","Ghanpur","Palimela","Mahamutharam","Kataram","Malharrao","Chityal","Tekumatla","Mogullapally",
+    "Regonda","Kothapalli Gori"
+  ],
+"Jogulamba Gadwal":["Maldakal","Ghattu", "Gadwal", "Dharoor", "KT Doddi", "Waddepally", "Manopad", "Itikyal", "Ieeza", "Undavelly", "Rajoli", "Alampur", "Yarravally"
+].sort(),
+  "Kamareddy": ["Banswada","Birkoor","Bichkunda","Jukkal","Madnoor","Nizamsagar","Pitlam","Nasrullabad","Pedda Kodapgal","Dongli","Mohammad Nagar","Kamareddy","Bhiknoor",
+    "Rajampet","Domakonda","Machareddy","Ramareddy","Bibipet","Tadwai","Sadasivanagar","Palvancha","Yellareddy","Lingampet","Nagareddipet","Gandhari"
+  ].sort(),
+  "Karimnagar": ["Karimnagar","Kothapally","Karimnagar Rural","Manakondur","Thimmapur","Ganneruvaram","Gangadhara","Ramadugu","Choppadandi","Chigurumamidi","Huzurabad",
+    "Veenavanka", "V.Saidapur", "Jammikunta", "Ellandakunta", "Shankarapatnam"
+  ].sort(),
+  "Khammam": [
+    "Aswapuram","Aswaraopeta","Bayyaram","Bhadrachalam","Bonakal","Burgampahad","Chandrugonda","Cherla","Chinthakani","Chintur","Dammapeta","Dummugudem","Enkuru",
+    "Garla","Gundala","Julurpad","Kallur","Kamepalle","Khammam Rural","Khammam Urban","Konijerla","Kothagudem","Kukunoor","Kunavaram","Kusumanchi","Madhira",
+    "Manuguru", "Mudigonda", "Mulkalapalle", "Nelakondapalle", "Palwancha", "Penuballi", "Pinapaka", "Sathupalle", "Singareni", "Tallada",
+    "Tekulapalle","Thirumalayapalem","Vararamachandrapuram","Velairpadu","Vemsoor","Venkatapuram","Wazeed","Wyra","Yellandu","Yerrupalem"
+  ],
+  "Komaram Bheem Asifabad": [ "Asifabad", "Bejjur", "Chintalamanepalli", "Dahegaon", "Jainoor", "Kagazngar", "Kerameri", "Koutala", "Lingapur", "Penchikalpet",
+    "Rebbena","Sirpur-T","Sirpur-U","Tiryani","Wankidi"
+  ],
+"Mahabubabad":["Bayyaram","Chinnagudur","Danthalapalle","Dornakal","Gangaram","Garla","Gudur","Kesamudram","Kothaguda","Kuravi","Mahabubabad","Maripeda",
+  "Narsimhulapet","Nellikudur","Peddavangara","Thorrur"
+],
+"Mahabubnagar":
+[ "Addakal", "Balanagar", "Bhoothpur", "CC Kunta", "Devarakadra", "Gandeed", "Hanwada", "Jadcherla", "Koilkonda", "Mahabubnagar (U)", "Mahabubnagar (R)", "Midjil",
+  "Moosapet","Nawabpet","Rajapur","Mohammadabad","Koukuntla"
+],
+
+  "Mancherial": ["Mancherial","Mandamarri","Jaipur","Kotapally","Asifabad","Jannaram","Parpally","Luxettipet", "Kasipet", "Bellampalle", "Bheemaram",
+      "Bheemini","Dandepalle","Hajipur","Nennal","Tandur","Vemanpally","Chennur"
+    ].sort(),
+
+  "Medak": ["Medak","Havelighanpur","Papannapet","Shankarampet-R","Ramayampet","Nizampet","Shankarampet-A","Tekmal",
+    "Alladurg","Regode","Narsapur","Kulcharam","Kowdipally","Shivampet","Chilipched","Toopran","Chegunta","Narsingi","Yeldurthy","Manoharabad"
+  ].sort(),
+
+  "Medchal–Malkajgiri": ["Alwal","Balanagar","Bachupally","Dundigal Gandimaisamma","Ghatkesar","Kapra","Keesara","Kukatpally",
+    "Malkajgiri","Medchal","Medipally","Muduchinthalapally","Quthbullapur","Shamirpet","Uppal"
+  ],
+"Mulugu":[
+  "Eturnagaram","Eturunagaram","Gundala","Kannaigudem","Kothagudem","Mangapet","Mothugudem","Mulugu","Polampalle"
+],
+ "Nagarkurnool":["Nagarkurnool","Bijinapally","Tadoor","Thimmajipet","Telkapally","Peddakothapally","Kollapur","Pentlavelli","Kodair","Padara","Lingala","Balmoor",
+  "Uppununtala","Achampet","Amrabad","Kalwakurty","Veldanda","Vangoor","Charakonda","Urkonda"
+].sort(),
+"Nalgonda":[
+  "Advidevulapally","Anumula","Chandampet","Chandur","Chinthapalli","Chityala","Damaracherla","Devarakonda","Gattuppal","Gundlapalli","Gudipalli","Gurrampode",
+"Kattangoor","Kethepalli","Kondamallepally","Madugulapally","Marriguda","Munugodu","Nampalli","Nakerekal","Narketpalli","Neredugommu","Nidmanoor","P.A.Palli",
+  "Peddavoora","Shali Gouraram","Thipparthy","Tirumalagiri","Vemulapalli","Miryalaguda"
+],
+"Narayanpet":["DAMARGIDDA","DHANWADA", "GUNDMAL", "KOSGI","KOTHAPALLY","KRISHNA","MADDUR","MAGANOOR","MAKTHAL","MARIKAL","NARAYANPET","NARWA","UTKOOR"
+],
+"Nirmal":["Basar","Bhainsa","Dasturabad","Dilawarpur","Kaddam (peddur)","Khanapur","Kubeer","Kuntala","Laxmanchanda","Lokeswaram","Mamda","Mudhole","Narsapur g","Nirmal rural","Pembi","Sarangapur","Soan","Tanur"
+],
+"Nizamabad": ["Aloor","Armoor","Balkonda","Bheemgal","Bodhan","Chandur","Dharapply","Dichapally","Donkeshwar","Indalwai","Jakranpally","Kammarapally","Kotagiri",
+  "Makloor","Mendora","Morthad","Mosra","Mugpal","Mupkal","Nandipet","Navipet","Nizamabad North","Nizamabad Rural","Nizamabad South","Pothangal","Renjal","Rudrur",
+  "Saloora","Sirikonda","Vailpoor","Varni","Yedpally","Yergatla"
+],
+"Peddapalli": ["Anthergoan", "Dharmaram", "Eligaid", "Julapalli", "Kamanpur", "Kalvasrirampoor", "Manthani","Mutharam(Manthani)", "Odela","Palakurthi","Peddapalli","Ramagiri", "Ramagundam","Sulthanabad"
+],
+"Rajanna Sircilla": ["Boinpally","Chandurthy", "Ellanthakunta","Gambhiraopet","Konaraopet","Mustabad","Rudrangi","Sircilla Urban","Thangallapalli","Vemulawada",
+  "Vemulawada Rural","Veernapalli","Yellareddipet"
+],
+"Ranga Reddy": ["Abdullapurmet","Amangal","Balapur","Chevella","Chowdergudem","Farooqnagar","Gandipet","Hayathnagar","Ibrahimpatnam","Kadthal","Kandukur","Keshampeta",
+  "Kondurg","Kothur","Madgul","Maheshwaram","Manchal","Moinabad","Nandigama","Rajendranagar","Saroornagar","Serilingampalli","Shabad","Shamshabad","Shankerpalle","Talakondapally","Yacharam"
+],
+
+"Sangareddy": ["Ameenapur","Andhole","Choutakur","Gummadidala","Hathanoora","Jharasangam","Jinnaram","Kandi","Kalher","Kangti","Kohir","Kondapur","Manoor","Munipalli",
+  "Narayankhed","Naykal","Nizampet","Nagalgidda","Patancheruvu","Pulkal","Raikode","Ramachandrapuram","Sadasivpet","Sangareddy","Sirgapoor","Watpalle","Zahirabad"
+],
+
+  "Siddipet": ["Siddipet Rural","Siddipet Urban","Narayanaraopet","Chinnakodur","Nangnoor","Dubbak","Mirdoddi","Thoguta","Doulthabad","Raipole","Kondapak","Gajwel",
+    "Jagadevapur","Markook","Wargal","Mulugu","Cherial","Komuravelly","Maddur","Husnabad Urban","Akkannapeta","Koheda","Bejjenki","Dhoolmitta","Akbarpet-Bhoompally","Kukunoorpally"
+  ].sort(),
+
+  "Suryapet": [ "Chilkur","Palakeedu", "Chivvemla", "Ananthagiri", "Huzurnagar", "Mothey", "Kodad", "Mellachervu", "Jajireddygudem", "Munagala", "Mallareddygudem", "Nuthankal",
+    "Nadigudem","Mattampally","Penpahad","Nereducherla","Athmakur(S)","Garidepally","Thirumalagiri","Thungathurthy","Nagaram","Maddirala"
+  ].sort(),
+  "Vikarabad": ["Dharanapally","Pargi","Puduru","Tandur","Taunguru","Vikarabad","Yenkapally","Chilkoor","Kondapur","Kondurg","Mabeda","Manchirevula","Maripally",
+    "Mominpet","Nalgonda", "Naserabad","Peruru","Shabad","Shadnagar","Marrugudem"
+  ].sort(),
+"Wanaparthy":[ "Amarchintha", "Atmakur", "Chinnambavi", "Ghanpur", "Gopalpet","Kothakota","Madanapur","Pangal","Peddamandaddi","Pebbair","Revally","Srirangapur","Weepangandla","Yedula"
+],
+
+  "Warangal Rural": ["Athmakur","Chennaraopet", "Damera","Duggondi","Geesugonda","Khanapur","Nadikuda","Nallabelly","Narsampet","Nekkonda","Parkal","Parvathagiri","Rayaparthy","Sangem","Shayampet","Wardhannapet"
+  ],
+  "Warangal Urban": ["Hanamkonda","Inavolu","Khaazipet","Kondaparthy","Kumarapalle","Madikonda","Nadikuda","Nakkalapalle","Palvelpula","Parkal","Pocharam","Rajipet",
+    "Vallampalle","Venkatapur","Vasudevapur","Warangal"
+  ],
+
+"Yadadri Bhuvanagiri":["ALAIR","ATHMAKUR (M)","B. RAMARAM","BHONGIR","BIBINAGAR","CHOUTUPPAL","MOTHKUR","NARAYANAPUR","POCHAMPALLY","RAJAPET","RAMANNAPET",
+  "THURKAPALLY","VALIGONDA","YADAGIRIGUTTA","GUNDALA","ADDAGUDURU","MOTAKONDURU"
+].sort(),
+  }
+};
+
+// Fallback generator for districts without data
+const getMandals = (state, district) => {
+  if (mandalsMap[state] && mandalsMap[state][district]) return mandalsMap[state][district];
+  return [district + " Mandal 1", district + " Mandal 2"]; // fallback
+}
+
+const commState = document.getElementById("comm_state");
+const propState = document.getElementById("prop_state");
+const commDistrict = document.getElementById("comm_district");
+const propDistrict = document.getElementById("prop_district");
+const commMandal = document.getElementById("comm_mandal");
+const propMandal = document.getElementById("prop_mandal");
+
+function populateDistrictsForState(state, districtSelect) {
+  districtSelect.innerHTML = "<option value=''>Select District</option>";
+  if (districts[state]) {
+    districts[state].forEach(d => {
+      let opt = document.createElement("option");
+      opt.value = d;
+      opt.textContent = d;
+      districtSelect.appendChild(opt);
+    });
+  }
+  districtSelect.dispatchEvent(new Event('change'));
+}
+
+function populateMandals(state, district, mandalSelect) {
+  mandalSelect.innerHTML = "<option value=''>Select Mandal</option>";
+  if (district) {
+    const mandals = getMandals(state, district);
+    mandals.forEach(m => {
+      let opt = document.createElement("option");
+      opt.value = m;
+      opt.text = m;
+      mandalSelect.appendChild(opt);
+    });
+  }
+}
+
+commState.addEventListener("change", function() {
+  populateDistrictsForState(this.value, commDistrict);
+});
+
+propState.addEventListener("change", function() {
+  populateDistrictsForState(this.value, propDistrict);
+});
+
+commDistrict.addEventListener("change", function(){
+  populateMandals(commState.value, this.value, commMandal);
+});
+
+propDistrict.addEventListener("change", function(){
+  populateMandals(propState.value, this.value, propMandal);
+});
+
+
+
+
+
+    // Applicant & Owner toggle
+    const ownerApplicantRadios = document.getElementsByName("ownerApplicant");
+    const ownerNameWrapper = document.getElementById("ownerNameWrapper");
+    const applicantWrapper = document.getElementById("applicantWrapper");
+    const ownerWrapper = document.getElementById("ownerWrapper");
+
+    ownerApplicantRadios.forEach(r => r.addEventListener("change", () => {
+      if (document.querySelector('input[name="ownerApplicant"]:checked').value === "same") {
+        ownerNameWrapper.classList.remove("hidden");
+        applicantWrapper.classList.add("hidden");
+        ownerWrapper.classList.add("hidden");
+        document.getElementById("ownername").required = true;
+        document.getElementById("applicantName").required = false;
+        document.getElementById("ownerNameDiff").required = false;
       } else {
-        applicantNameInput.classList.add("hidden");
-        applicantNameInput.value = "";
+        ownerNameWrapper.classList.add("hidden");
+        applicantWrapper.classList.remove("hidden");
+        ownerWrapper.classList.remove("hidden");
+        document.getElementById("ownername").required = false;
+        document.getElementById("applicantName").required = true;
+        document.getElementById("ownerNameDiff").required = true;
       }
     }));
 
+
+
+  //   ownerApplicantRadios.forEach(r => {
+  //   r.addEventListener("change", toggleOwnerApplicantFields);
+  // });
+
+  // toggleOwnerApplicantFields(); // Initialize on page load
+
+
+    // Property Details toggle
     const propertyDetails = document.getElementById("propertyDetails");
     propertyDetails.addEventListener("change", () => {
       document.getElementById("coordFile").classList.add("hidden");
@@ -540,140 +725,82 @@
       if (propertyDetails.value === "revenue") document.getElementById("revenueText").classList.remove("hidden");
     });
 
+    // Guidelines toggle payment
     document.getElementById("agreeGuidelines").addEventListener("change", function() {
       document.getElementById("paymentSection").classList.toggle("hidden", !this.checked);
     });
 
-    const districts = {
-  AP: [
-    "Anantapur", "Chittoor", "East Godavari", "Guntur", "Krishna",
-    "Kurnool", "YSR Kadapa", "Nellore (SPSR Nellore)", "Prakasam",
-    "Srikakulam", "Visakhapatnam", "Vizianagaram", "West Godavari",
-    "Anakapalli", "Alluri Sitharama Raju", "Kakinada",
-    "Konaseema", "Eluru", "NTR", "Palnadu", "Bapatla",
-    "Annamayya", "Sri Sathya Sai", "Tirupati", "Parvathipuram Manyam"
-  ],
-  TG: [
-    "Adilabad", "Bhadradri Kothagudem", "Hanumakonda", "Hyderabad",
-    "Jagtial", "Jangaon", "Jayashankar Bhupalpally", "Jogulamba Gadwal",
-    "Kamareddy", "Karimnagar", "Khammam", "Komaram Bheem Asifabad",
-    "Mahabubabad", "Mahabubnagar", "Mancherial", "Medak",
-    "Medchal–Malkajgiri", "Mulugu", "Nagarkurnool", "Nalgonda",
-    "Narayanpet", "Nirmal", "Nizamabad", "Peddapalli",
-    "Rajanna Sircilla", "Ranga Reddy", "Sangareddy", "Siddipet",
-    "Suryapet", "Vikarabad", "Wanaparthy", "Warangal Rural",
-    "Warangal Urban", "Yadadri Bhuvanagiri"
-  ]
-};
+    // Mobile input restrictions
+    const mobileEl = document.getElementById('mobile');
+    mobileEl.addEventListener('input', function() { this.value = this.value.replace(/[^0-9]/g,'').slice(0,10); });
 
+    // ID selection change -> show upload only
+    const idSelect = document.getElementById("idSelect");
+    const idUploadWrapper = document.getElementById("idUploadWrapper");
+    const idUpload = document.getElementById("idUpload");
+    const idUploadLabel = document.getElementById("idUploadLabel");
 
-    function loadDistricts(stateSelect, districtSelect) {
-      const state = stateSelect.value;
-      districtSelect.innerHTML = "<option value=''>Select District</option>";
-      if (districts[state]) {
-        districts[state].forEach(d => {
-          let opt = document.createElement("option");
-          opt.value = d;
-          opt.textContent = d;
-          districtSelect.appendChild(opt);
-        });
+    idSelect.addEventListener("change", function(){
+      if (this.value) {
+        idUploadWrapper.style.display = "block";
+        idUploadLabel.textContent = "Upload " + this.options[this.selectedIndex].text;
+        idUpload.required = true;
+      } else {
+        idUploadWrapper.style.display = "none";
+        idUpload.value = "";
+        idUpload.required = false;
       }
-    }
-    document.getElementById("comm_state").addEventListener("change", function() {
-      loadDistricts(this, document.getElementById("comm_district"));
-    });
-    document.getElementById("prop_state").addEventListener("change", function() {
-      loadDistricts(this, document.getElementById("prop_district"));
     });
 
-    function toBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result.split(",")[1]);
-        reader.onerror = err => reject(err);
-      });
-    }
+    // Base64 helper
+    function toBase64(file) { return new Promise((resolve,reject) => { const reader=new FileReader(); reader.readAsDataURL(file); reader.onload=()=>resolve(reader.result.split(",")[1]); reader.onerror=err=>reject(err); }); }
 
-    // 🔹 SUBMIT HANDLER
-    document.getElementById("propertyForm").addEventListener("submit", async function(e) {
+    // Form submit (same as original)
+    document.getElementById("propertyForm").addEventListener("submit", async function(e){
       e.preventDefault();
-      const f = e.target;
-      const data = {
-        email: f.email.value,
-        ownername: f.ownername.value,
-        applicantChoice: f.applicantChoice.value,
-        applicantName: f.applicantChoice.value === "other" ? f.applicantName.value : "",
-        comm_house: f.comm_house.value,
-        comm_village: f.comm_village.value,
-        comm_mandal: f.comm_mandal.value,
-        comm_state: f.comm_state.value,
-        comm_district: f.comm_district.value,
-        mobile: f.mobile.value,
-        idnumber: f.idnumber.value,
-        propertyType: f.propertyType.value,
-        prop_house: f.prop_house.value,
-        prop_colony: f.prop_colony.value,
-        prop_village: f.prop_village.value,
-        prop_mandal: f.prop_mandal.value,
-        prop_state: f.prop_state.value,
-        prop_district: f.prop_district.value,
-        propertyDetails: f.propertyDetails.value,
-        surveyText: f.surveyText.value,
-        revenueText: f.revenueText.value,
-        briefRequest: f.briefRequest.value,
-        docSubmit: f.docSubmit.value
-      };
+      const f=e.target, submitBtn=document.getElementById("submitBtn");
+      if(!f.reportValidity()) return;
+      submitBtn.disabled=true; submitBtn.textContent="Submitting...";
+      const data={ email:f.email.value, ownerApplicant:document.querySelector('input[name="ownerApplicant"]:checked').value, ownername:f.ownername.value || "", applicantName:f.applicantName ? f.applicantName.value : "", ownerNameDiff:f.ownerNameDiff ? f.ownerNameDiff.value : "", comm_house:f.comm_house.value, comm_street:f.comm_street ? f.comm_street.value : "", comm_village:f.comm_village.value, comm_state:f.comm_state.value, comm_district:f.comm_district.value, comm_mandal:f.comm_mandal.value, mobile:f.mobile.value, propertyType:f.propertyType.value, prop_house:f.prop_house.value, prop_colony:f.prop_colony.value, prop_village:f.prop_village.value, prop_state:f.prop_state.value, prop_district:f.prop_district.value, prop_mandal:f.prop_mandal.value, propertyDetails:f.propertyDetails.value, surveyText:f.surveyText.value, revenueText:f.revenueText.value, briefRequest:f.briefRequest.value, docSubmit:"Yes", idSelect:f.idSelect.value };
 
-      // Upload files
-      if (f.idfile.files.length > 0) {
-        let file = f.idfile.files[0];
-        data.idfile = await toBase64(file);
-        data.idfileName = file.name;
-        data.idfileType = file.type;
-      }
+      if(f.idUpload && f.idUpload.files.length>0){ let file=f.idUpload.files[0]; data.idUpload=await toBase64(file); data.idUploadName=file.name; data.idUploadType=file.type; }
+      if(f.coordFile && f.coordFile.files.length>0){ let file=f.coordFile.files[0]; data.coordFile=await toBase64(file); data.coordFileName=file.name; data.coordFileType=file.type; }
+      data.documents=[]; if(f.documents && f.documents.files.length>0){ for(let file of f.documents.files){ data.documents.push({data:await toBase64(file), name:file.name, type:file.type}); } }
+      if(f.transactionCopy && f.transactionCopy.files.length>0){ let file=f.transactionCopy.files[0]; data.transactionCopy={data:await toBase64(file), name:file.name, type:file.type}; }
 
-      if (f.coordFile.files.length > 0) {
-        let file = f.coordFile.files[0];
-        data.coordFile = await toBase64(file);
-        data.coordFileName = file.name;
-        data.coordFileType = file.type;
-      }
+      try{
+        let res=await fetch("https://script.google.com/macros/s/AKfycbyvKcyowVF2oOcvLlNqxWOZJQC2pHoeixtjGjMh9_jZL8GpkIwoCw3cF3f1UgH3iEqa0A/exec",{method:"POST", body:JSON.stringify(data)});
+        let result=await res.json();
+        if(result && result.success){ alert("✅ Submitted successfully! Your Reg ID is: "+result.id); window.location.reload(); }
+        else{ alert("❌ Error: "+(result && result.error ? result.error:"Unknown error")); submitBtn.disabled=false; submitBtn.textContent="Submit"; }
+      } catch(err){ alert("❌ Submission failed: "+err.message); submitBtn.disabled=false; submitBtn.textContent="Submit"; }
 
-      data.documents = [];
-      for (let file of f.documents.files) {
-        data.documents.push({
-          data: await toBase64(file),
-          name: file.name,
-          type: file.type
-        });
-      }
-
-      if (f.transactionCopy.files.length > 0) {
-        let file = f.transactionCopy.files[0];
-        data.transactionCopy = {
-          data: await toBase64(file),
-          name: file.name,
-          type: file.type
-        };
-      }
-
-      try {
-        let res = await fetch("https://script.google.com/macros/s/AKfycbxpv00KdU1DzYJTN4lUWiW4KsDhIoPDy4MWFTNkJ8egkkVTL9i_qlpyPC6eUwRg1AegAg/exec", {
-          method: "POST",
-          body: JSON.stringify(data)
-        });
-        let result = await res.json();
-        if (result.success) {
-          alert("✅ Submitted successfully! Your Reg ID is: " + result.id);
-          window.location.reload();
-        } else {
-          alert("❌ Error: " + result.error);
-        }
-      } catch (err) {
-        alert("❌ Submission failed: " + err.message);
-      }
     });
+
+    // Prefill districts
+    function prefillAllDistricts() {
+      const commDist=document.getElementById("comm_district");
+      const propDist=document.getElementById("prop_district");
+      commDist.innerHTML="<option value=''>Select District</option>";
+      propDist.innerHTML="<option value=''>Select District</option>";
+      if(districts.AP) districts.AP.forEach(d=>{ let o=document.createElement("option"); o.value=d;o.text=d;commDist.appendChild(o); propDist.appendChild(o.cloneNode(true)); });
+      if(districts.TG) districts.TG.forEach(d=>{ let o=document.createElement("option"); o.value=d;o.text=d;commDist.appendChild(o); propDist.appendChild(o.cloneNode(true)); });
+    }
+    prefillAllDistricts();
+
+    document.addEventListener('DOMContentLoaded', function() {
+  const allInputs = document.querySelectorAll('input, select, textarea');
+  allInputs.forEach(input => {
+    input.setAttribute('autocomplete', 'off');
+    input.setAttribute('autocorrect', 'off');
+    input.setAttribute('autocapitalize', 'off');
+    input.setAttribute('spellcheck', 'false');
+    input.value = '';
+  });
+  document.getElementById('propertyForm').reset();
+});
+
+
   </script>
 </body>
 </html>
