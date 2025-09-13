@@ -62,27 +62,133 @@
     input[type="file"]::file-selector-button:hover { background: #004957; }
     @media (max-width: 900px) { .col-6 { grid-column: 1 / -1; } .col-4, .col-3 { grid-column: 1 / -1; } .submit-btn button { max-width: 100%; } .logo { max-width:150px; } }
     /* small id/address specific layout */
-    .id-type-group { margin-bottom: 6px; grid-column: 1 / -1; }
+    .id-type-group { margin-bottom: 6px; grid-column: span 6; }
 
     .col-7 { grid-column: span 7; }
 
     .form-grid { 
-  display: grid; 
-  grid-template-columns: repeat(12, 1fr); 
-  gap: 12px; 
-  align-items: start; 
-}
+      display: grid; 
+      grid-template-columns: repeat(12, 1fr); 
+      gap: 12px; 
+      align-items: start; 
+    }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-  box-shadow: 0 0 0px 1000px white inset !important;
-  -webkit-text-fill-color: #000 !important;
-}
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    select:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+      box-shadow: 0 0 0px 1000px white inset !important;
+      -webkit-text-fill-color: #000 !important;
+    }
 
+    /* Tooltip styles */
+    .tooltip-container {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    
+    .tooltip {
+      visibility: hidden;
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 14px;
+      font-weight: normal;
+    }
+    
+    .tooltip-container:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .tooltip-container input:focus + .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .name-fields {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .name-fields input {
+      flex: 1;
+    }
+    
+    .address-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    /* NEW STYLES FOR ALIGNMENT IMPROVEMENTS */
+    .mobile-email-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      grid-column: 1 / -1;
+    }
+    
+    .property-id-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      grid-column: 1 / -1;
+    }
+    
+    .property-type-section {
+      margin-bottom: 10px;
+    }
+    
+    /* NEW: Half-width relation field */
+    .half-width-relation {
+      grid-column: span 6;
+    }
+    
+    /* NEW: Half-width property details */
+    .half-width-property-details {
+      grid-column: span 6;
+    }
+    
+    /* NEW: Half-width identity proof */
+    .half-width-id-proof {
+      grid-column: span 6;
+    }
+    
+    /* NEW: Property address grid */
+    .property-address-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      grid-column: 1 / -1;
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-email-row,
+      .property-id-row,
+      .property-address-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .half-width-relation,
+      .half-width-property-details,
+      .half-width-id-proof {
+        grid-column: 1 / -1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -94,196 +200,238 @@ select:-webkit-autofill {
     <p>Know the authentic ownership status of the land/house properties before sale or purchase for protecting your future transactions and to create a digital ownership locker - An initiation from Pure Earth Foundation to empower the property owners.</p>
 
     <form id="propertyForm" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off">
-
-
       <div class="form-grid">
-
-        <!-- 1. Are Applicant and Property Owner the Same? -->
-        <div class="col-12">
-          <label>Name of the Applicant and Property Owner are same</label>
-          <div class="radio-group">
-            <label><input type="radio" name="ownerApplicant" value="same" checked> Same</label>
-            <label><input type="radio" name="ownerApplicant" value="different"> Different</label>
-          </div>
+        <div class="col-6">
+          <label for="ownerApplicant">Name of Property Owner or Representative</label>
+          <select name="ownerApplicant" id="ownerApplicant">
+            <option value="owner" selected>Property Owner</option>
+            <option value="rep">Representative</option>
+          </select>
         </div>
-
         
-
-        <!-- Name fields -->
-      
-        <div class="col-12" id="ownerNameWrapper">
-            <label for="ownername">Name</label>
-            <input type="text" name="ownername" id="ownername" placeholder="Enter full name" required minlength="4"  autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false">
-            <small class="error-msg" id="ownernameError" style="color:red; display:none;">Name must be at least 4 characters.</small>
+        <div class="col-12" id="ownerWrapper">
+          
+          <div class="name-fields">
+            <div class="tooltip-container">
+              <input type="text" name="ownerFirstName" id="ownerFirstName" placeholder="First Name" required minlength="2">
+              <span class="tooltip">Enter your first name as it appears on official documents</span>
+            </div>
+            <div class="tooltip-container">
+              <input type="text" name="ownerSurname" id="ownerSurname" placeholder="Surname" required minlength="2">
+              <span class="tooltip">Enter your surname/family name</span>
+            </div>
           </div>
           
-          <div class="col-6 hidden" id="applicantWrapper">
-            <label for="applicantName">Applicant Name</label>
-            <input type="text" name="applicantName" id="applicantName" placeholder="Enter Applicant Name" minlength="4"  autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false">
-            <small class="error-msg" id="applicantNameError" style="color:red; display:none;">Applicant Name must be at least 4 characters.</small>
+          <h3>Address for Communication (Property Owner)</h3>
+          <div class="address-grid">
+            <div class="tooltip-container">
+              <input type="text" name="owner_house" id="owner_house" placeholder="HOUSE NO " autocomplete="off">
+              <span class="tooltip">Enter house number, building name, or apartment number</span>
+            </div>
+            <div class="tooltip-container">
+              <input type="text" name="owner_street" id="owner_street" placeholder="STREET / ROAD" autocomplete="off">
+              <span class="tooltip">Enter street name, area, or locality</span>
+            </div>
+            <div class="tooltip-container">
+              <input type="text" name="owner_village" id="owner_village" placeholder="City/Town/Village" autocomplete="off">
+              <span class="tooltip">Enter your city, town or village name</span>
+            </div>
+            <div class="tooltip-container">
+              <select name="owner_state" id="owner_state">
+                <option value="">Select State</option>
+                <option value="AP">Andhra Pradesh</option>
+                <option value="TG">Telangana</option>
+              </select>
+              <span class="tooltip">Select your state</span>
+            </div>
+            <div class="tooltip-container">
+              <select name="owner_district" id="owner_district">
+                <option value="">District</option>
+              </select>
+              <span class="tooltip">Select your district</span>
+            </div>
+            <div class="tooltip-container">
+              <select name="owner_mandal" id="owner_mandal">
+                <option value="">Mandal</option>
+              </select>
+              <span class="tooltip">Select your mandal</span>
+            </div>
           </div>
           
-          <div class="col-6 hidden" id="ownerWrapper">
-            <label for="ownerNameDiff">Owner Name</label>
-            <input type="text" name="ownerNameDiff" id="ownerNameDiff" placeholder="Enter Owner Name" minlength="4" autocomplete="off">
-            <small class="error-msg" id="ownerNameDiffError" style="color:red; display:none;">Owner Name must be at least 4 characters.</small>
+          <div class="mobile-email-row">
+            <div class="tooltip-container">
+              <input type="tel" name="owner_mobile" id="owner_mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" required placeholder="Mobile Number" autocomplete="off">
+              <span class="tooltip">Enter 10-digit mobile number</span>
+            </div>
+            
+            <div class="tooltip-container">
+              <input type="email" name="owner_email" id="owner_email" required placeholder="Email Address" autocomplete="off">
+              <span class="tooltip">Enter a valid email address</span>
+            </div>
           </div>
-          <!-- Name fields -->
-
-        <!-- 2. Address for Communication (6 + 6 split layout) -->
-        <div class="col-12"><h3>Address for Communication</h3></div>
-
-        <div class="col-6">
-          <label for="comm_house">House No</label>
-          <input type="text" name="comm_house" id="comm_house" placeholder="HOUSE NO" autocomplete="off">
+          <small class="error-msg" id="ownerEmailError" style="color:red; display:none; grid-column: 1 / -1;">Please enter a valid email address</small>
         </div>
-        <div class="col-6">
-          <label for="comm_street">Street / Road</label>
-          <input type="text" name="comm_street" id="comm_street" placeholder="STREET / ROAD" autocomplete="off">
-        </div>
-
-        <div class="col-6">
-          <label for="comm_village">Village / Colony</label>
-          <input type="text" name="comm_village" id="comm_village" placeholder="VILLAGE / COLONY" autocomplete="off">
-        </div>
-
-        <div class="col-6">
-          <label for="comm_state">State</label>
-          <select name="comm_state" id="comm_state">
-            <option value="">Select</option>
-            <option value="AP">Andhra Pradesh</option>
-            <option value="TG">Telangana</option>
-          </select>
-        </div>
-
-        <div class="col-6">
-          <label for="comm_district">District</label>
-          <select name="comm_district" id="comm_district">
-            <option value="">Select</option>
-          </select>
-        </div>
-
-        <div class="col-6">
-          <label for="comm_mandal">Mandal</label>
-          <select name="comm_mandal" id="comm_mandal">
-            <option value="">Select</option>
-          </select>
-        </div>
-
-        <!-- 3. Mobile and 4. Email -->
-        <div class="col-6">
-          <label for="mobile">Mobile Number</label>
-          <input type="tel" name="mobile" id="mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" required placeholder="10-digit mobile number"   autocomplete="off">
-        </div>
-
-        <div class="col-6">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required placeholder="Enter your email address"  autocomplete="off">
-            <small class="error-msg" id="emailError" style="color:red; display:none;">Please enter a valid email address (example: example@domain.com)</small>
+        
+        <div class="col-12 hidden" id="repWrapper">
+            <div class="name-fields">
+                <div class="tooltip-container">
+                  <input type="text" name="repFirstName" id="repFirstName" placeholder="First Name" minlength="2">
+                  <span class="tooltip">Enter your first name</span>
+                </div>
+                <div class="tooltip-container">
+                  <input type="text" name="repSurname" id="repSurname" placeholder="Surname" minlength="2">
+                  <span class="tooltip">Enter your surname</span>
+                </div>
+              </div>
+              
+          <div class="half-width-relation">
+            <div class="tooltip-container">
+              <input type="text" name="relation" id="relation" placeholder="Relation with Property Owner">
+              <span class="tooltip">How are you related to the property owner? (e.g., Son, Daughter, Lawyer, etc.)</span>
+            </div>
           </div>
           
-
-        <!-- 5. Property Type -->
-        <div class="col-12">
-          <label>Property Type</label>
-          <select name="propertyType" id="propertyType">
-            <option value="">Select Property Type</option>
-            <option value="Land">Land / Plot</option>
-            <option value="House">House / Structure</option>
-          </select>
+          <h3>Address for Communication (Representative)</h3>
+          <div class="address-grid" id="repAddressSection">
+            <div class="tooltip-container">
+              <input type="text" name="rep_house" id="rep_house" placeholder="HOUSE NO " autocomplete="off">
+              <span class="tooltip">Enter house number, building name, or apartment number</span>
+            </div>
+            <div class="tooltip-container">
+              <input type="text" name="rep_street" id="rep_street" placeholder="STREET / ROAD" autocomplete="off">
+              <span class="tooltip">Enter street name, area, or locality</span>
+            </div>
+            <div class="tooltip-container">
+              <input type="text" name="rep_village" id="rep_village" placeholder="City/Town/Village" autocomplete="off">
+              <span class="tooltip">Enter your city, town or village name</span>
+            </div>
+            <div class="tooltip-container">
+              <select name="rep_state" id="rep_state">
+                <option value="">State</option>
+                <option value="AP">Andhra Pradesh</option>
+                <option value="TG">Telangana</option>
+              </select>
+              <span class="tooltip">Select your state</span>
+            </div>
+            <div class="tooltip-container">
+              <select name="rep_district" id="rep_district">
+                <option value="">District</option>
+              </select>
+              <span class="tooltip">Select your district</span>
+            </div>
+            <div class="tooltip-container">
+              <select name="rep_mandal" id="rep_mandal">
+                <option value="">Mandal</option>
+              </select>
+              <span class="tooltip">Select your mandal</span>
+            </div>
+          </div>
+          
+          <div class="mobile-email-row">
+            <div class="tooltip-container">
+              <input type="tel" name="rep_mobile" id="rep_mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" placeholder="Mobile Number" autocomplete="off">
+              <span class="tooltip">Enter 10-digit mobile number</span>
+            </div>
+            
+            <div class="tooltip-container">
+              <input type="email" name="rep_email" id="rep_email" placeholder="Email Address" autocomplete="off">
+              <span class="tooltip">Enter a valid email address</span>
+            </div>
+          </div>
+          <small class="error-msg" id="repEmailError" style="color:red; display:none; grid-column: 1 / -1;">Please enter a valid email address</small>
         </div>
 
-        <!-- 6. Location Address of Property -->
+        <div class="property-id-row">
+          <div class="property-type-section">
+            <label>Property Type</label>
+            <select name="propertyType" id="propertyType">
+              <option value="Land">Land / Plot</option>
+              <option value="House">House / Structure</option>
+            </select>
+          </div>
+          
+          
+        
         <div class="col-12"><h3>Location / Address of the Property</h3></div>
 
-        <div class="col-6">
-          <label for="prop_house">House / Plot No</label>
-          <input type="text" name="prop_house" id="prop_house" placeholder="HOUSE NO / PLOT NO">
-        </div>
-
-        <div class="col-6">
-          <label for="prop_colony">Name of Colony / Layout</label>
-          <input type="text" name="prop_colony" id="prop_colony" placeholder="COLONY / LAYOUT">
-        </div>
-
-        <div class="col-6">
-          <label for="prop_village">Village / Town</label>
-          <input type="text" name="prop_village" id="prop_village" placeholder="VILLAGE / TOWN">
-        </div>
-
-        <div class="col-6">
-          <label for="prop_state">State</label>
-          <select name="prop_state" id="prop_state">
-            <option value="">Select</option>
-            <option value="AP">Andhra Pradesh</option>
-            <option value="TG">Telangana</option>
-          </select>
-        </div>
-
-        <div class="col-6">
-          <label for="prop_district">District</label>
-          <select name="prop_district" id="prop_district">
-            <option value="">Select</option>
-          </select>
-        </div>
-
-        <div class="col-6">
-          <label for="prop_mandal">Mandal</label>
-          <select name="prop_mandal" id="prop_mandal">
-            <option value="">Select</option>
-          </select>
-        </div>
-
-        <!-- 7. Property Details -->
-        <div class="col-12">
-  <label>Property Details</label>
-  <select name="propertyDetails" id="propertyDetails">
-    <option value="">Select</option>
-    <option value="coords">HAVE COORDINATES OF THE PROPERTY</option>
-    <option value="noCoords">DON'T HAVE COORDINATES OF THE PROPERTY</option>
-    <option value="survey">SURVEY NO/TOWN SURVEY NO</option>
-    <option value="revenue">NAME OF Revenue Village/Block & Ward</option>
-  </select>
-</div>
-
-<div class="col-12">
-  <input type="file" name="coordFile" id="coordFile" class="hidden" accept=".pdf">
-  <small id="coordMessage" style="color:#555; font-size:0.9rem;" class="hidden">Only PDF files are accepted</small>
-
-  <input type="text" name="surveyText" id="surveyText" class="hidden" placeholder="Enter Survey No">
-  <input type="text" name="revenueText" id="revenueText" class="hidden" placeholder="Enter Revenue Village/Block & Ward">
-</div>
-
-
-        <!-- 8. Brief Description -->
-        <div class="col-12">
-            <label for="briefRequest">Brief Description of Request</label>
-            <textarea name="briefRequest" id="briefRequest" placeholder="Please describe your request in detail" rows="5"></textarea>
-            <small class="error-msg" id="briefRequestError" style="color:red; display:none;">
-              Please enter at least 100 characters.
-            </small>
+        <div class="property-address-grid">
+          <div class="tooltip-container">
+            <input type="text" name="prop_house" id="prop_house" placeholder="HOUSE NO / PLOT NO">
+            <span class="tooltip">Enter House No or Plot No</span>
           </div>
 
-        <!-- 10. Upload Documents -->
-        <div class="col-12">
-            <label>Upload Documents</label>
-            <p class="doc-note">(ANY ONE OF THE COPY OF SALE DEED / AGREEMENT OF SALE / PATTADHAR PASS BOOK PAGES / ANY OTHER PROOF OF OWNERSHIP.)</p>
-            <input type="file" name="documents" id="documents" multiple accept=".pdf">
-            <small style="color:#555; font-size:0.9rem;">Please upload PDF files only</small>
+          <div class="tooltip-container">
+            <input type="text" name="prop_colony" id="prop_colony" placeholder="COLONY / LAYOUT">
+            <span class="tooltip">Enter Colony name or Layout</span>
           </div>
-        <!-- 11. SELECT ID (dropdown + upload according to selection) -->
-        <!-- <div class="col-6 id-type-group">
-          <label for="idSelect">Identity Proof</label>
-          <select id="idSelect" name="idSelect" required>
+
+          <div class="tooltip-container">
+            <input type="text" name="prop_village" id="prop_village" placeholder="VILLAGE / TOWN">
+            <span class="tooltip">Enter Village or Town</span>
+          </div>
+
+          <div class="tooltip-container">
+            <select name="prop_state" id="prop_state">
+              <option value="">Select State</option>
+              <option value="AP">Andhra Pradesh</option>
+              <option value="TG">Telangana</option>
+            </select>
+            <span class="tooltip">Select your state</span>
+          </div>
+
+          <div class="tooltip-container">
+            <select name="prop_district" id="prop_district">
+              <option value="">Select</option>
+            </select>
+            <span class="tooltip">Select your district</span>
+          </div>
+
+          <div class="tooltip-container">
+            <select name="prop_mandal" id="prop_mandal">
+              <option value="">Select Mandal</option>
+            </select>
+            <span class="tooltip">Select your mandal</span>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label>Property Details</label>
+          <select name="propertyDetails" id="propertyDetails">
             <option value="">Select</option>
-            <option value="pan">PAN</option>
-            <option value="tele">Telephone Bill</option>
-            <option value="elec">Electricity Bill</option>
-            <option value="voter">Voter ID</option>
-            <option value="dl">Driving Licence</option>
+            <option value="coords">HAVE COORDINATES OF THE PROPERTY</option>
+            <option value="noCoords">DON'T HAVE COORDINATES OF THE PROPERTY</option>
+            <option value="survey">SURVEY NO/TOWN SURVEY NO</option>
+            <option value="revenue">NAME OF Revenue Village/Block & Ward</option>
           </select>
-        </div> -->
-          <div class="col-6 id-type-group">
+        </div>
+
+        <div class="col-12">
+          <input type="file" name="coordFile" id="coordFile" class="hidden" accept=".pdf">
+          <small id="coordMessage" style="color:#555; font-size:0.9rem;" class="hidden">Only PDF files are accepted</small>
+          <input type="text" name="surveyText" id="surveyText" class="hidden" placeholder="Enter Survey No">
+          <input type="text" name="revenueText" id="revenueText" class="hidden" placeholder="Enter Revenue Village/Block & Ward">
+        </div>
+
+        <div class="col-12">
+          <label for="briefRequest">Brief Description of Request</label>
+          <textarea name="briefRequest" id="briefRequest" placeholder="Please describe your request in detail" rows="5"></textarea>
+          <small class="error-msg" id="briefRequestError" style="color:red; display:none;">
+            Please enter a maximum of 500 words.
+          </small>
+        </div>
+
+        <div class="col-12">
+          <label>Upload Documents</label>
+          <p class="doc-note">(ANY ONE OF THE COPY OF SALE DEED / AGREEMENT OF SALE / PATTADHAR PASS BOOK PAGES / ANY OTHER PROOF OF OWNERSHIP.)</p>
+          <input type="file" name="documents" id="documents" multiple accept=".pdf">
+          <small style="color:#555; font-size:0.9rem;">Please upload PDF files only</small>
+        </div>
+
+
+
+
+        <div style="flex: 0 0 50%; display: flex; flex-direction: column;">
+          <div class="id-type-group">
             <label for="idSelect">Identity Proof</label>
             <select id="idSelect" name="idSelect" required>
               <option value="">Select</option>
@@ -294,17 +442,14 @@ select:-webkit-autofill {
               <option value="dl">Driving Licence</option>
             </select>
           </div>
-          
-          <div class="col-6" id="idUploadWrapper" style="display:none">
-            <label id="idUploadLabel">Upload ID Document (PDF only)</label>
-            <input type="file" id="idUpload" name="idUpload" accept=".pdf">
-            <small style="color:#555; font-size:0.9rem;">Only PDF files are accepted</small>
-          </div>
-          
-          
-
+        </div>
         
-        <!-- Guidelines -->
+        <div style="flex: 0 0 50%;" id="idUploadWrapper">
+          <label id="idUploadLabel">Upload ID Document (PDF only)</label>
+          <input type="file" id="idUpload" name="idUpload" accept=".pdf">
+          <small style="color:#555; font-size:0.9rem;">Only PDF files are accepted</small>
+        </div>
+      </div>
         <div class="col-12">
           <h3>Guidelines</h3>
           <ul>
@@ -317,7 +462,6 @@ select:-webkit-autofill {
           </div>
         </div>
 
-        <!-- Payment Section -->
         <div id="paymentSection" class="col-12 hidden">
           <label>Registration/User charges (INR 2000/-)</label>
           <p>You can pay the registration fee by scanning the QR code below:</p>
@@ -330,58 +474,13 @@ select:-webkit-autofill {
         <div class="submit-btn">
           <button type="submit" id="submitBtn">Submit</button>
         </div>
-
       </div>
     </form>
   </div>
 
   <script>
-
-const emailEl = document.getElementById('email');
-const emailError = document.getElementById('emailError');
-
-emailEl.addEventListener('input', function() {
-  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if(this.value && !regex.test(this.value)) {
-    emailError.style.display = 'block';
-  } else {
-    emailError.style.display = 'none';
-  }
-});
-
-
-function setupInlineValidation(inputEl, errorEl) {
-  inputEl.addEventListener('input', function() {
-    if (this.value && this.value.length < 4) {
-      errorEl.style.display = 'block';
-    } else {
-      errorEl.style.display = 'none';
-    }
-  });
-}
-
-// Apply validation to all name inputs
-setupInlineValidation(document.getElementById('ownername'), document.getElementById('ownernameError'));
-setupInlineValidation(document.getElementById('applicantName'), document.getElementById('applicantNameError'));
-setupInlineValidation(document.getElementById('ownerNameDiff'), document.getElementById('ownerNameDiffError'));
-
-
-
-const briefRequestEl = document.getElementById('briefRequest');
-const briefRequestError = document.getElementById('briefRequestError');
-
-briefRequestEl.addEventListener('input', function() {
-  if(this.value.length > 0 && this.value.length < 100) {
-    briefRequestError.style.display = 'block';
-  } else {
-    briefRequestError.style.display = 'none';
-  }
-});
-
-
-
-    // Districts and Mandals setup
-    const districts = {
+   // Districts and Mandals setup
+   const districts = {
   AP: ["Alluri Sitharama Raju","Anakapalli","Anantapur","Annamayya","Bapatla","Chittoor","Dr. B. R. Ambedkar Konaseema District","East Godavari","Eluru","Guntur","Krishna","Kakinada","Kurnool","NTR","Palnadu","Parvathipuram Manyam","Prakasam","Srikakulam","Sri Sathya Sai","Tirupati","Visakhapatnam","Vizianagaram","West Godavari","YSR Kadapa","Nellore"].sort(),
   TG: ["Adilabad","Bhadradri Kothagudem","Hanumakonda","Hyderabad","Jagtial","Jangaon","Jayashankar Bhupalpally","Jogulamba Gadwal","Kamareddy","Karimnagar","Khammam","Komaram Bheem Asifabad","Mahabubabad","Mahabubnagar","Mancherial","Medak","Medchal–Malkajgiri","Mulugu","Nagarkurnool","Nalgonda","Narayanpet","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Ranga Reddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal Rural","Warangal Urban","Yadadri Bhuvanagiri"].sort()
 };
@@ -622,97 +721,183 @@ const mandalsMap = {
   }
 };
 
-// Fallback generator for districts without data
-const getMandals = (state, district) => {
-  if (mandalsMap[state] && mandalsMap[state][district]) return mandalsMap[state][district];
-  return [district + " Mandal 1", district + " Mandal 2"]; // fallback
-}
+    // Fallback generator for districts without data
+    const getMandals = (state, district) => {
+      if (mandalsMap[state] && mandalsMap[state][district]) return mandalsMap[state][district];
+      return [district + " Mandal 1", district + " Mandal 2"]; // fallback
+    }
 
-const commState = document.getElementById("comm_state");
-const propState = document.getElementById("prop_state");
-const commDistrict = document.getElementById("comm_district");
-const propDistrict = document.getElementById("prop_district");
-const commMandal = document.getElementById("comm_mandal");
-const propMandal = document.getElementById("prop_mandal");
-
-function populateDistrictsForState(state, districtSelect) {
-  districtSelect.innerHTML = "<option value=''>Select District</option>";
-  if (districts[state]) {
-    districts[state].forEach(d => {
-      let opt = document.createElement("option");
-      opt.value = d;
-      opt.textContent = d;
-      districtSelect.appendChild(opt);
-    });
-  }
-  districtSelect.dispatchEvent(new Event('change'));
-}
-
-function populateMandals(state, district, mandalSelect) {
-  mandalSelect.innerHTML = "<option value=''>Select Mandal</option>";
-  if (district) {
-    const mandals = getMandals(state, district);
-    mandals.forEach(m => {
-      let opt = document.createElement("option");
-      opt.value = m;
-      opt.text = m;
-      mandalSelect.appendChild(opt);
-    });
-  }
-}
-
-commState.addEventListener("change", function() {
-  populateDistrictsForState(this.value, commDistrict);
-});
-
-propState.addEventListener("change", function() {
-  populateDistrictsForState(this.value, propDistrict);
-});
-
-commDistrict.addEventListener("change", function(){
-  populateMandals(commState.value, this.value, commMandal);
-});
-
-propDistrict.addEventListener("change", function(){
-  populateMandals(propState.value, this.value, propMandal);
-});
-
-
-
-
-
-    // Applicant & Owner toggle
-    const ownerApplicantRadios = document.getElementsByName("ownerApplicant");
-    const ownerNameWrapper = document.getElementById("ownerNameWrapper");
-    const applicantWrapper = document.getElementById("applicantWrapper");
+    // DOM elements
+    const ownerApplicantSelect = document.getElementById("ownerApplicant");
     const ownerWrapper = document.getElementById("ownerWrapper");
+    const repWrapper = document.getElementById("repWrapper");
+    const ownerEmailEl = document.getElementById("owner_email");
+    const ownerEmailError = document.getElementById("ownerEmailError");
+    const repEmailEl = document.getElementById("rep_email");
+    const repEmailError = document.getElementById("repEmailError");
+    const briefRequestEl = document.getElementById("briefRequest");
+    const briefRequestError = document.getElementById("briefRequestError");
 
-    ownerApplicantRadios.forEach(r => r.addEventListener("change", () => {
-      if (document.querySelector('input[name="ownerApplicant"]:checked').value === "same") {
-        ownerNameWrapper.classList.remove("hidden");
-        applicantWrapper.classList.add("hidden");
-        ownerWrapper.classList.add("hidden");
-        document.getElementById("ownername").required = true;
-        document.getElementById("applicantName").required = false;
-        document.getElementById("ownerNameDiff").required = false;
-      } else {
-        ownerNameWrapper.classList.add("hidden");
-        applicantWrapper.classList.remove("hidden");
+    // State and district elements
+    const ownerState = document.getElementById("owner_state");
+    const ownerDistrict = document.getElementById("owner_district");
+    const ownerMandal = document.getElementById("owner_mandal");
+    const repState = document.getElementById("rep_state");
+    const repDistrict = document.getElementById("rep_district");
+    const repMandal = document.getElementById("rep_mandal");
+    const propState = document.getElementById("prop_state");
+    const propDistrict = document.getElementById("prop_district");
+    const propMandal = document.getElementById("prop_mandal");
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Reset form and set autocomplete off
+      const allInputs = document.querySelectorAll('input, select, textarea');
+      allInputs.forEach(input => {
+        input.setAttribute('autocomplete', 'off');
+        input.setAttribute('autocorrect', 'off');
+        input.setAttribute('autocapitalize', 'off');
+        input.setAttribute('spellcheck', 'false');
+        input.value = '';
+      });
+      document.getElementById('propertyForm').reset();
+      
+      // Initialize field visibility
+      toggleOwnerRepFields();
+      
+      // Manually trigger change to populate districts initially
+      ownerState.dispatchEvent(new Event('change'));
+      repState.dispatchEvent(new Event('change'));
+      propState.dispatchEvent(new Event('change'));
+    });
+
+    // Toggle between owner and representative fields
+    function toggleOwnerRepFields() {
+      if (ownerApplicantSelect.value === "owner") {
         ownerWrapper.classList.remove("hidden");
-        document.getElementById("ownername").required = false;
-        document.getElementById("applicantName").required = true;
-        document.getElementById("ownerNameDiff").required = true;
+        repWrapper.classList.add("hidden");
+        document.getElementById("ownerFirstName").required = true;
+        document.getElementById("ownerSurname").required = true;
+        document.getElementById("owner_mobile").required = true;
+        document.getElementById("owner_email").required = true;
+        document.getElementById("relation").required = false;
+        document.getElementById("repFirstName").required = false;
+        document.getElementById("repSurname").required = false;
+        document.getElementById("rep_mobile").required = false;
+        document.getElementById("rep_email").required = false;
+      } else if (ownerApplicantSelect.value === "rep") {
+        ownerWrapper.classList.add("hidden");
+        repWrapper.classList.remove("hidden");
+        document.getElementById("ownerFirstName").required = false;
+        document.getElementById("ownerSurname").required = false;
+        document.getElementById("owner_mobile").required = false;
+        document.getElementById("owner_email").required = false;
+        document.getElementById("relation").required = true;
+        document.getElementById("repFirstName").required = true;
+        document.getElementById("repSurname").required = true;
+        document.getElementById("rep_mobile").required = true;
+        document.getElementById("rep_email").required = true;
+      } else {
+        ownerWrapper.classList.add("hidden");
+        repWrapper.classList.add("hidden");
       }
-    }));
+    }
 
+    // Email validation
+    function validateEmail(emailEl, errorEl) {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if(emailEl.value && !regex.test(emailEl.value)) {
+        errorEl.style.display = 'block';
+        return false;
+      } else {
+        errorEl.style.display = 'none';
+        return true;
+      }
+    }
 
+    // Brief request validation
+    function validateBriefRequest() {
+      // Split the text by spaces and filter out empty strings to get the word count
+      const words = briefRequestEl.value.trim().split(/\s+/).filter(word => word.length > 0);
+      
+      const briefRequestError = document.getElementById("briefRequestError");
+      
+      if (words.length > 500) {
+        briefRequestError.textContent = 'You can enter a maximum of 500 words.';
+        briefRequestError.style.display = 'block';
+        return false;
+      } else {
+        briefRequestError.style.display = 'none';
+        return true;
+      }
+    }
 
-  //   ownerApplicantRadios.forEach(r => {
-  //   r.addEventListener("change", toggleOwnerApplicantFields);
-  // });
+    // Populate districts for a state select
+    function populateDistrictsForState(state, districtSelect) {
+      districtSelect.innerHTML = "<option value=''>Select District</option>";
+      if (districts[state]) {
+        districts[state].forEach(d => {
+          let opt = document.createElement("option");
+          opt.value = d;
+          opt.textContent = d;
+          districtSelect.appendChild(opt);
+        });
+      }
+      districtSelect.dispatchEvent(new Event('change'));
+    }
 
-  // toggleOwnerApplicantFields(); // Initialize on page load
+    // Populate mandals for a district
+    function populateMandals(state, district, mandalSelect) {
+      mandalSelect.innerHTML = "<option value=''>Select Mandal</option>";
+      if (district) {
+        const mandals = getMandals(state, district);
+        mandals.forEach(m => {
+          let opt = document.createElement("option");
+          opt.value = m;
+          opt.text = m;
+          mandalSelect.appendChild(opt);
+        });
+      }
+    }
 
+    // Event listeners
+    ownerApplicantSelect.addEventListener("change", toggleOwnerRepFields);
+    
+    ownerEmailEl.addEventListener("input", function() {
+      validateEmail(ownerEmailEl, ownerEmailError);
+    });
+    
+    repEmailEl.addEventListener("input", function() {
+      validateEmail(repEmailEl, repEmailError);
+    });
+    
+    briefRequestEl.addEventListener("input", validateBriefRequest);
+    
+    // State change listeners
+    ownerState.addEventListener("change", function() {
+      populateDistrictsForState(this.value, ownerDistrict);
+    });
+    
+    repState.addEventListener("change", function() {
+      populateDistrictsForState(this.value, repDistrict);
+    });
+    
+    propState.addEventListener("change", function() {
+      populateDistrictsForState(this.value, propDistrict);
+    });
+    
+    // District change listeners
+    ownerDistrict.addEventListener("change", function() {
+      populateMandals(ownerState.value, this.value, ownerMandal);
+    });
+    
+    repDistrict.addEventListener("change", function() {
+      populateMandals(repState.value, this.value, repMandal);
+    });
+    
+    propDistrict.addEventListener("change", function() {
+      populateMandals(propState.value, this.value, propMandal);
+    });
 
     // Property Details toggle
     const propertyDetails = document.getElementById("propertyDetails");
@@ -731,14 +916,21 @@ propDistrict.addEventListener("change", function(){
     });
 
     // Mobile input restrictions
-    const mobileEl = document.getElementById('mobile');
-    mobileEl.addEventListener('input', function() { this.value = this.value.replace(/[^0-9]/g,'').slice(0,10); });
+    const mobileEls = document.querySelectorAll('input[type="tel"]');
+    mobileEls.forEach(el => {
+      el.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g,'').slice(0,10);
+      });
+    });
 
     // ID selection change -> show upload only
     const idSelect = document.getElementById("idSelect");
     const idUploadWrapper = document.getElementById("idUploadWrapper");
     const idUpload = document.getElementById("idUpload");
     const idUploadLabel = document.getElementById("idUploadLabel");
+    
+    // Initial hide
+    idUploadWrapper.style.display = "none";
 
     idSelect.addEventListener("change", function(){
       if (this.value) {
@@ -753,54 +945,119 @@ propDistrict.addEventListener("change", function(){
     });
 
     // Base64 helper
-    function toBase64(file) { return new Promise((resolve,reject) => { const reader=new FileReader(); reader.readAsDataURL(file); reader.onload=()=>resolve(reader.result.split(",")[1]); reader.onerror=err=>reject(err); }); }
+    function toBase64(file) {
+      return new Promise((resolve,reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.split(",")[1]);
+        reader.onerror = err => reject(err);
+      });
+    }
 
-    // Form submit (same as original)
+    // Form submit
     document.getElementById("propertyForm").addEventListener("submit", async function(e){
       e.preventDefault();
-      const f=e.target, submitBtn=document.getElementById("submitBtn");
-      if(!f.reportValidity()) return;
-      submitBtn.disabled=true; submitBtn.textContent="Submitting...";
-      const data={ email:f.email.value, ownerApplicant:document.querySelector('input[name="ownerApplicant"]:checked').value, ownername:f.ownername.value || "", applicantName:f.applicantName ? f.applicantName.value : "", ownerNameDiff:f.ownerNameDiff ? f.ownerNameDiff.value : "", comm_house:f.comm_house.value, comm_street:f.comm_street ? f.comm_street.value : "", comm_village:f.comm_village.value, comm_state:f.comm_state.value, comm_district:f.comm_district.value, comm_mandal:f.comm_mandal.value, mobile:f.mobile.value, propertyType:f.propertyType.value, prop_house:f.prop_house.value, prop_colony:f.prop_colony.value, prop_village:f.prop_village.value, prop_state:f.prop_state.value, prop_district:f.prop_district.value, prop_mandal:f.prop_mandal.value, propertyDetails:f.propertyDetails.value, surveyText:f.surveyText.value, revenueText:f.revenueText.value, briefRequest:f.briefRequest.value, docSubmit:"Yes", idSelect:f.idSelect.value };
+      const f = e.target;
+      const submitBtn = document.getElementById("submitBtn");
+      
+      // Validate emails
+      const isOwnerEmailValid = validateEmail(ownerEmailEl, ownerEmailError);
+      const isRepEmailValid = validateEmail(repEmailEl, repEmailError);
+      const isBriefValid = validateBriefRequest();
+      
+      if(!f.reportValidity() || !isOwnerEmailValid || !isRepEmailValid || !isBriefValid) return;
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+      
+      // Prepare form data
+      const data = {
+        ownerApplicant: ownerApplicantSelect.value,
+        ownerFirstName: f.ownerFirstName.value,
+        ownerSurname: f.ownerSurname.value,
+        owner_house: f.owner_house.value,
+        owner_street: f.owner_street.value,
+        owner_village: f.owner_village.value,
+        owner_state: f.owner_state.value,
+        owner_district: f.owner_district.value,
+        owner_mandal: f.owner_mandal.value,
+        owner_mobile: f.owner_mobile.value,
+        owner_email: f.owner_email.value,
+        relation: f.relation.value,
+        repFirstName: f.repFirstName.value,
+        repSurname: f.repSurname.value,
+        rep_house: f.rep_house.value,
+        rep_street: f.rep_street.value,
+        rep_village: f.rep_village.value,
+        rep_state: f.rep_state.value,
+        rep_district: f.rep_district.value,
+        rep_mandal: f.rep_mandal.value,
+        rep_mobile: f.rep_mobile.value,
+        rep_email: f.rep_email.value,
+        propertyType: f.propertyType.value,
+        prop_house: f.prop_house.value,
+        prop_colony: f.prop_colony.value,
+        prop_village: f.prop_village.value,
+        prop_state: f.prop_state.value,
+        prop_district: f.prop_district.value,
+        prop_mandal: f.prop_mandal.value,
+        propertyDetails: f.propertyDetails.value,
+        surveyText: f.surveyText.value,
+        revenueText: f.revenueText.value,
+        briefRequest: f.briefRequest.value,
+        docSubmit: "Yes",
+        idSelect: f.idSelect.value
+      };
 
-      if(f.idUpload && f.idUpload.files.length>0){ let file=f.idUpload.files[0]; data.idUpload=await toBase64(file); data.idUploadName=file.name; data.idUploadType=file.type; }
-      if(f.coordFile && f.coordFile.files.length>0){ let file=f.coordFile.files[0]; data.coordFile=await toBase64(file); data.coordFileName=file.name; data.coordFileType=file.type; }
-      data.documents=[]; if(f.documents && f.documents.files.length>0){ for(let file of f.documents.files){ data.documents.push({data:await toBase64(file), name:file.name, type:file.type}); } }
-      if(f.transactionCopy && f.transactionCopy.files.length>0){ let file=f.transactionCopy.files[0]; data.transactionCopy={data:await toBase64(file), name:file.name, type:file.type}; }
+      // Process file uploads
+      if(f.idUpload && f.idUpload.files.length>0){
+        let file = f.idUpload.files[0];
+        data.idUpload = await toBase64(file);
+        data.idUploadName = file.name;
+        data.idUploadType = file.type;
+      }
+      
+      if(f.coordFile && f.coordFile.files.length>0){
+        let file = f.coordFile.files[0];
+        data.coordFile = await toBase64(file);
+        data.coordFileName = file.name;
+        data.coordFileType = file.type;
+      }
+      
+      data.documents = [];
+      if(f.documents && f.documents.files.length>0){
+        for(let file of f.documents.files){
+          data.documents.push({data: await toBase64(file), name: file.name, type: file.type});
+        }
+      }
+      
+      if(f.transactionCopy && f.transactionCopy.files.length>0){
+        let file = f.transactionCopy.files[0];
+        data.transactionCopy = {data: await toBase64(file), name: file.name, type: file.type};
+      }
 
+      // Submit form data
       try{
-        let res=await fetch("https://script.google.com/macros/s/AKfycbyvKcyowVF2oOcvLlNqxWOZJQC2pHoeixtjGjMh9_jZL8GpkIwoCw3cF3f1UgH3iEqa0A/exec",{method:"POST", body:JSON.stringify(data)});
-        let result=await res.json();
-        if(result && result.success){ alert("✅ Submitted successfully! Your Reg ID is: "+result.id); window.location.reload(); }
-        else{ alert("❌ Error: "+(result && result.error ? result.error:"Unknown error")); submitBtn.disabled=false; submitBtn.textContent="Submit"; }
-      } catch(err){ alert("❌ Submission failed: "+err.message); submitBtn.disabled=false; submitBtn.textContent="Submit"; }
-
+        let res = await fetch("https://script.google.com/macros/s/AKfycbzZhUb3NMpsO7MQYhnAQj3X4qMkMpDnmA8PSWeHF6-5PE1Rjq_mLceGdaRivljq2a0g/exec", {
+          method: "POST",
+          body: JSON.stringify(data)
+        });
+        
+        let result = await res.json();
+        if(result && result.success){
+          alert("✅ Submitted successfully! Your Reg ID is: " + result.id);
+          window.location.reload();
+        } else {
+          alert("❌ Error: " + (result && result.error ? result.error : "Unknown error"));
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Submit";
+        }
+      } catch(err) {
+        alert("❌ Submission failed: " + err.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
+      }
     });
-
-    // Prefill districts
-    function prefillAllDistricts() {
-      const commDist=document.getElementById("comm_district");
-      const propDist=document.getElementById("prop_district");
-      commDist.innerHTML="<option value=''>Select District</option>";
-      propDist.innerHTML="<option value=''>Select District</option>";
-      if(districts.AP) districts.AP.forEach(d=>{ let o=document.createElement("option"); o.value=d;o.text=d;commDist.appendChild(o); propDist.appendChild(o.cloneNode(true)); });
-      if(districts.TG) districts.TG.forEach(d=>{ let o=document.createElement("option"); o.value=d;o.text=d;commDist.appendChild(o); propDist.appendChild(o.cloneNode(true)); });
-    }
-    prefillAllDistricts();
-
-    document.addEventListener('DOMContentLoaded', function() {
-  const allInputs = document.querySelectorAll('input, select, textarea');
-  allInputs.forEach(input => {
-    input.setAttribute('autocomplete', 'off');
-    input.setAttribute('autocorrect', 'off');
-    input.setAttribute('autocapitalize', 'off');
-    input.setAttribute('spellcheck', 'false');
-    input.value = '';
-  });
-  document.getElementById('propertyForm').reset();
-});
-
-
   </script>
 </body>
 </html>
