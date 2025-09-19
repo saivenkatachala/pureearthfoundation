@@ -22,6 +22,9 @@
       --error: #dc3545;
       --radius: 8px;
       --transition: all 0.3s ease;
+      /* New Colors for bright fields */
+      --bright-bg: #f5f5f5;
+      --bright-text: #000000;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Times New Roman', Times, serif; background: var(--light-bg); padding: 15px 10px; line-height: 1.6; color: var(--text); font-size: 16px; }
@@ -30,9 +33,36 @@
     .logo-box { width: 100%; display:flex; justify-content:center; align-items:center; padding:0; margin:0 auto 6px auto; }
     .logo { max-width: 180px; height:auto; transition: transform 0.2s ease; }
     .logo:hover { transform: scale(1.02); }
-    h1 { text-align: center; color: var(--primary); margin: 8px 0 14px; font-size: 1.6rem; padding-bottom: 8px; position: relative; }
-    h1:after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 3px; background: var(--primary); border-radius: 3px; }
-    h3 { color: var(--accent); margin: 14px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); font-size: 1.25rem; }
+    
+    /* MODIFICATION: All headings to a uniform style */
+    h1, h3 { 
+      font-size: 1.25rem; /* Equivalent to 20px */
+      font-family: 'Times New Roman', Times, serif; 
+      color: var(--primary); 
+      margin: 8px 0 14px; 
+      text-align: center;
+      padding-bottom: 8px; 
+      position: relative; 
+    }
+    h1:after { 
+      content: ''; 
+      position: absolute; 
+      bottom: 0; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      width: 70px; 
+      height: 3px; 
+      background: var(--primary); 
+      border-radius: 3px; 
+    }
+    h3 { 
+      color: var(--accent); 
+      margin: 14px 0 10px; 
+      padding-bottom: 6px; 
+      border-bottom: 1px solid var(--border); 
+      text-align: left;
+    }
+
     p { text-align: justify; margin-bottom: 12px; color:#023e8a; font-size: 1.05rem; line-height: 1.3; }
     form { margin-top: 6px; }
     .form-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; align-items: start; }
@@ -41,7 +71,30 @@
     .col-4 { grid-column: span 4; }
     .col-3 { grid-column: span 3; }
     label { display:block; margin-top: 8px; font-weight: 600; color: var(--text); font-size: 1rem; }
-    input, select, textarea { width:100%; box-sizing:border-box; padding: 12px 12px; margin-top: 6px; border:1px solid var(--border); border-radius: var(--radius); font-size: 16px; transition: var(--transition); background: var(--card-bg); color: var(--text); }
+    
+    /* MODIFICATION: Brighter colors for normal fields */
+    input, select, textarea { 
+      width:100%; 
+      box-sizing:border-box; 
+      padding: 12px 12px; 
+      margin-top: 6px; 
+      border:1px solid var(--border); 
+      border-radius: var(--radius); 
+      font-size: 16px; 
+      transition: var(--transition); 
+      background: var(--bright-bg); 
+      color: var(--bright-text); 
+    }
+
+    /* MODIFICATION: Style for disabled fields */
+    input:disabled, select:disabled, textarea:disabled {
+        background-color: var(--light-bg) !important;
+        color: var(--text-light) !important;
+        border-color: #e0e0e0 !important;
+        cursor: not-allowed !important;
+        opacity: 0.7;
+    }
+
     input:focus, select:focus, textarea:focus { outline:none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,95,115,0.08); }
     textarea { resize: vertical; min-height: 100px; }
     .radio-group { margin-top: 8px; display:flex; flex-wrap:wrap; gap:12px; }
@@ -66,11 +119,11 @@
 
     .col-7 { grid-column: span 7; }
 
-    .form-grid { 
-      display: grid; 
-      grid-template-columns: repeat(12, 1fr); 
-      gap: 12px; 
-      align-items: start; 
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+      align-items: start;
     }
 
     input:-webkit-autofill,
@@ -89,7 +142,7 @@
       display: inline-block;
       width: 100%;
     }
-    
+
     .tooltip {
       visibility: hidden;
       width: 200px;
@@ -108,32 +161,32 @@
       font-size: 14px;
       font-weight: normal;
     }
-    
+
     .tooltip-container:hover .tooltip {
       visibility: visible;
       opacity: 1;
     }
-    
+
     .tooltip-container input:focus + .tooltip {
       visibility: visible;
       opacity: 1;
     }
-    
+
     .name-fields {
       display: flex;
       gap: 10px;
     }
-    
+
     .name-fields input {
       flex: 1;
     }
-    
+
     .address-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 12px;
     }
-    
+
     /* NEW STYLES FOR ALIGNMENT IMPROVEMENTS */
     .mobile-email-row {
       display: grid;
@@ -141,53 +194,96 @@
       gap: 12px;
       grid-column: 1 / -1;
     }
-    
+
     .property-id-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       grid-column: 1 / -1;
     }
-    
+
     .property-type-section {
       margin-bottom: 10px;
     }
-    
+
     /* NEW: Half-width relation field */
     .half-width-relation {
       grid-column: span 6;
     }
-    
+
     /* NEW: Half-width property details */
     .half-width-property-details {
       grid-column: span 6;
     }
-    
+
     /* NEW: Half-width identity proof */
     .half-width-id-proof {
       grid-column: span 6;
     }
-    
+
     /* NEW: Property address grid */
     .property-address-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 12px;
       grid-column: 1 / -1;
     }
-    
+
+    .property-identification-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      grid-column: 1 / -1;
+    }
+
+    .coordinates-section {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      grid-column: 1 / -1;
+    }
+
+    .coordinates-section .radio-group {
+      justify-content: center;
+    }
+
     @media (max-width: 768px) {
       .mobile-email-row,
       .property-id-row,
-      .property-address-grid {
+      .property-address-grid,
+      .property-identification-grid,
+      .address-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .half-width-relation,
       .half-width-property-details,
       .half-width-id-proof {
         grid-column: 1 / -1;
       }
+    }
+
+
+
+    /* Corrected styling for brighter placeholders */
+    input::placeholder,
+    textarea::placeholder {
+      color: #141514; /* A bright green. You can use any hex code. */
+      opacity: 1; /* This is crucial to ensure the color is fully visible */
+    }
+
+    /* Vendor-specific prefixes for broader compatibility */
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+      color: #0d0e0d;
+      opacity: 1;
+    }
+
+    input::-moz-placeholder,
+    textarea::-moz-placeholder {
+      color: #171817;
+      opacity: 1;
     }
   </style>
 </head>
@@ -196,45 +292,46 @@
     <div class="logo-box">
       <img src="logo.png" class="logo" alt="Logo">
     </div>
-    <h1>Registration Form for Property Status</h1>
+    
+    <h1>Registration Form - Property Status Service </h1>
     <p>Know the authentic ownership status of the land/house properties before sale or purchase for protecting your future transactions and to create a digital ownership locker - An initiation from Pure Earth Foundation to empower the property owners.</p>
 
     <form id="propertyForm" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off">
       <div class="form-grid">
         <div class="col-6">
-          <label for="ownerApplicant">Name of Property Owner or Representative</label>
-          <select name="ownerApplicant" id="ownerApplicant">
-            <option value="owner" selected>Select</option>
-            <option value="owner">Property Owner</option>
-            <option value="rep">Representative</option>
+          <label for="ownerApplicant">Property Owner / Representative</label>
+          <select name="ownerApplicant" id="ownerApplicant" required>
+              <option value="">Select</option>
+              <option value="Property Owner">Property Owner</option>
+              <option value="Representative">Representative</option>
           </select>
         </div>
-        
-        <div class="col-12" id="ownerWrapper">
-          
+
+        <div class="col-12 hidden" id="ownerWrapper">
+          <h3>Owner Details</h3>
           <div class="name-fields">
             <div class="tooltip-container">
+               
               <input type="text" name="ownerFirstName" id="ownerFirstName" placeholder="First Name" required minlength="2">
               <span class="tooltip">Enter your first name as it appears on official documents</span>
             </div>
             <div class="tooltip-container">
-              <input type="text" name="ownerSurname" id="ownerSurname" placeholder="Surname" required minlength="2">
+              <input type="text" name="ownerSurname" id="ownerSurname" placeholder="Surname"required minlength="2">
               <span class="tooltip">Enter your surname/family name</span>
             </div>
           </div>
           
-          <h3>Address for Communication (Property Owner)</h3>
           <div class="address-grid">
             <div class="tooltip-container">
-              <input type="text" name="owner_house" id="owner_house" placeholder="HOUSE NO " autocomplete="off">
+              <input type="text" name="owner_house" id="owner_house" placeholder="House no" autocomplete="off">
               <span class="tooltip">Enter house number, building name, or apartment number</span>
             </div>
             <div class="tooltip-container">
-              <input type="text" name="owner_street" id="owner_street" placeholder="STREET / ROAD" autocomplete="off">
+              <input type="text" name="owner_street" id="owner_street"placeholder="Street / Road" autocomplete="off">
               <span class="tooltip">Enter street name, area, or locality</span>
             </div>
             <div class="tooltip-container">
-              <input type="text" name="owner_village" id="owner_village" placeholder="City/Town/Village" autocomplete="off">
+              <input type="text" name="owner_village" id="owner_village" placeholder="City / Town / Village" autocomplete="off">
               <span class="tooltip">Enter your city, town or village name</span>
             </div>
             <div class="tooltip-container">
@@ -261,12 +358,12 @@
           
           <div class="mobile-email-row">
             <div class="tooltip-container">
-              <input type="tel" name="owner_mobile" id="owner_mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" required placeholder="Mobile Number" autocomplete="off">
+              <input type="tel" name="owner_mobile" id="owner_mobile" pattern="[0-9]{10}" placeholder="Mobile Number" minlength="10" maxlength="10" required autocomplete="off">
               <span class="tooltip">Enter 10-digit mobile number</span>
             </div>
             
             <div class="tooltip-container">
-              <input type="email" name="owner_email" id="owner_email" required placeholder="Email Address" autocomplete="off">
+              <input type="email" name="owner_email" id="owner_email" placeholder="Email" required autocomplete="off">
               <span class="tooltip">Enter a valid email address</span>
             </div>
           </div>
@@ -274,39 +371,40 @@
         </div>
         
         <div class="col-12 hidden" id="repWrapper">
-            <div class="name-fields">
-                <div class="tooltip-container">
-                  <input type="text" name="repFirstName" id="repFirstName" placeholder="First Name" minlength="2">
-                  <span class="tooltip">Enter your first name</span>
-                </div>
-                <div class="tooltip-container">
-                  <input type="text" name="repSurname" id="repSurname" placeholder="Surname" minlength="2">
-                  <span class="tooltip">Enter your surname</span>
-                </div>
-              </div>
+          <h3>Representative Details</h3>
+          <div class="name-fields">
+            <div class="tooltip-container">
+              <input type="text" name="repFirstName" id="repFirstName" placeholder="First Name" minlength="2">
+              <span class="tooltip">Enter your first name</span>
+            </div>
+            <div class="tooltip-container">
+              <input type="text" name="repSurname" id="repSurname"placeholder="Surname" minlength="2">
+              <span class="tooltip">Enter your surname</span>
+            </div>
+          </div>
               
           <div class="half-width-relation">
             <div class="tooltip-container">
-              <input type="text" name="relation" id="relation" placeholder="Relation with Property Owner">
+              <input type="text" name="relation"placeholder="Relation with Property Owner" id="relation">
               <span class="tooltip">How are you related to the property owner? (e.g., Son, Daughter, Lawyer, etc.)</span>
             </div>
           </div>
           
-          <h3>Address for Communication (Representative)</h3>
           <div class="address-grid" id="repAddressSection">
             <div class="tooltip-container">
-              <input type="text" name="rep_house" id="rep_house" placeholder="HOUSE NO " autocomplete="off">
+              <input type="text" name="rep_house" id="rep_house" placeholder="House no" autocomplete="off">
               <span class="tooltip">Enter house number, building name, or apartment number</span>
             </div>
             <div class="tooltip-container">
-              <input type="text" name="rep_street" id="rep_street" placeholder="STREET / ROAD" autocomplete="off">
+              <input type="text" name="rep_street" id="rep_street" placeholder="Street / Road" autocomplete="off">
               <span class="tooltip">Enter street name, area, or locality</span>
             </div>
             <div class="tooltip-container">
-              <input type="text" name="rep_village" id="rep_village" placeholder="City/Town/Village" autocomplete="off">
+              <input type="text" name="rep_village" id="rep_village"placeholder="City / Town / Village" autocomplete="off">
               <span class="tooltip">Enter your city, town or village name</span>
             </div>
             <div class="tooltip-container">
+              <label for="rep_state">State</label>
               <select name="rep_state" id="rep_state">
                 <option value="">State</option>
                 <option value="AP">Andhra Pradesh</option>
@@ -315,12 +413,14 @@
               <span class="tooltip">Select your state</span>
             </div>
             <div class="tooltip-container">
+              <label for="rep_district">District</label>
               <select name="rep_district" id="rep_district">
                 <option value="">District</option>
               </select>
               <span class="tooltip">Select your district</span>
             </div>
             <div class="tooltip-container">
+              <label for="rep_mandal">Mandal</label>
               <select name="rep_mandal" id="rep_mandal">
                 <option value="">Mandal</option>
               </select>
@@ -330,125 +430,135 @@
           
           <div class="mobile-email-row">
             <div class="tooltip-container">
-              <input type="tel" name="rep_mobile" id="rep_mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" placeholder="Mobile Number" autocomplete="off">
+              <input type="tel" name="rep_mobile" placeholder="Mobile Number"  id="rep_mobile" pattern="[0-9]{10}" minlength="10" maxlength="10" autocomplete="off">
               <span class="tooltip">Enter 10-digit mobile number</span>
             </div>
             
             <div class="tooltip-container">
-              <input type="email" name="rep_email" id="rep_email" placeholder="Email Address" autocomplete="off">
+              <input type="email" name="rep_email" id="rep_email" placeholder="Email" autocomplete="off">
               <span class="tooltip">Enter a valid email address</span>
             </div>
           </div>
           <small class="error-msg" id="repEmailError" style="color:red; display:none; grid-column: 1 / -1;">Please enter a valid email address</small>
         </div>
-
-        <div class="property-id-row">
-          <div class="property-type-section">
-            <label>Property Type</label>
-            <select name="propertyType" id="propertyType">
-              <option value="Land">Land / Plot</option>
-              <option value="House">House / Structure</option>
-            </select>
-          </div>
-          
-          
         
-        <div class="col-12"><h3>Location / Address of the Property</h3></div>
+        <div class="col-12">
+            <h3>Property Details</h3>
+            <div class="property-type-section">
+                <select name="propertyType" id="propertyType">
+                    <option value="">Select Property Type</option>
+                    <option value="Land">Land (Agriculture / Non Agriculture)</option>
+                    <option value="Plot">Plot</option>
+                    <option value="House">House / Structure</option>
+                </select>
+            </div>
+        </div>
 
-        <div class="property-address-grid">
-          <div class="tooltip-container">
-            <input type="text" name="prop_house" id="prop_house" placeholder="HOUSE NO / PLOT NO">
-            <span class="tooltip">Enter House No or Plot No</span>
-          </div>
+        <div class="col-12 hidden" id="propertyInfoSection">
+            <div class="property-identification-grid">
+                <div class="tooltip-container" id="housePlotLandNoField" style="grid-column: span 3;">
+                    <input type="text" name="housePlotLandNo" id="housePlotLandNo" placeholder ="House / Plot / Land No" class="dynamic-input">
+                    <span class="tooltip">Enter the property number</span>
+                </div>
+                <div class="tooltip-container" id="colonyLayoutField" style="grid-column: span 3;">
+                    <input type="text" name="prop_colony" id="prop_colony" placeholder="Colony / Layout">
+                    <span class="tooltip">Enter Colony / Layout name</span>
+                </div>
+                <div class="tooltip-container" style="grid-column: span 3;">
+                    <input type="text" name="surveyNo" id="surveyNo" class="dynamic-input" placeholder="Survey No">
+                    <span class="tooltip">Enter Survey Number</span>
+                </div>
+                <div class="tooltip-container" style="grid-column: span 3;">
+                    <input type="text" name="townSurveyNo" id="townSurveyNo" class="dynamic-input" placeholder="Town Survey No">
+                    <span class="tooltip">Enter Town Survey Number</span>
+                </div>
+                <div class="tooltip-container" id="revenueVillageField" style="grid-column: span 3;">
+                    <input type="text" name="revenueVillage" id="revenueVillage" class="dynamic-input"placeholder="Revenue Village">
+                    <span class="tooltip">Enter the name of the Revenue Village</span>
+                </div>
+                <div class="name-fields" id="blockWardField" style="grid-column: span 3;">
+                    <div class="tooltip-container">
+                        <input type="text" name="block" id="block" placeholder="Block"class="dynamic-input">
+                        <span class="tooltip">Enter Block</span>
+                    </div>
+                    <div class="tooltip-container">
+                        <input type="text" name="ward" id="ward" placeholder="Ward" class="dynamic-input">
+                        <span class="tooltip">Enter Ward</span>
+                    </div>
+                </div>
+            </div>
 
-          <div class="tooltip-container">
-            <input type="text" name="prop_colony" id="prop_colony" placeholder="COLONY / LAYOUT">
-            <span class="tooltip">Enter Colony name or Layout</span>
-          </div>
-
-          <div class="tooltip-container">
-            <input type="text" name="prop_village" id="prop_village" placeholder="VILLAGE / TOWN">
-            <span class="tooltip">Enter Village or Town</span>
-          </div>
-
-          <div class="tooltip-container">
-            <select name="prop_state" id="prop_state">
-              <option value="">Select State</option>
-              <option value="AP">Andhra Pradesh</option>
-              <option value="TG">Telangana</option>
-            </select>
-            <span class="tooltip">Select your state</span>
-          </div>
-
-          <div class="tooltip-container">
-            <select name="prop_district" id="prop_district">
-              <option value="">Select</option>
-            </select>
-            <span class="tooltip">Select your district</span>
-          </div>
-
-          <div class="tooltip-container">
-            <select name="prop_mandal" id="prop_mandal">
-              <option value="">Select Mandal</option>
-            </select>
-            <span class="tooltip">Select your mandal</span>
-          </div>
+            <div class="property-address-grid">
+                <div class="tooltip-container" style="grid-column: span 2;">
+                    <select name="prop_state" id="prop_state">
+                        <option value="">Select State</option>
+                        <option value="AP">Andhra Pradesh</option>
+                        <option value="TG">Telangana</option>
+                    </select>
+                    <span class="tooltip">Select your state</span>
+                </div>
+                <div class="tooltip-container" style="grid-column: span 2;">
+                    <select name="prop_district" id="prop_district">
+                        <option value="">Select District</option>
+                    </select>
+                    <span class="tooltip">Select your district</span>
+                </div>
+                <div class="tooltip-container" style="grid-column: span 2;">
+                    <select name="prop_mandal" id="prop_mandal">
+                        <option value="">Select Mandal</option>
+                    </select>
+                    <span class="tooltip">Select your mandal</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12">
+            <div class="coordinates-section">
+                <label for="hasCoordinatesSelect">Do you have property coordinates?</label>
+                <select name="hasCoordinates" id="hasCoordinatesSelect">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <div class="hidden" id="coordUploadField">
+                    <label for="coordFile">Upload Coordinates File (PDF)</label>
+                    <input type="file" name="coordFile" id="coordFile" accept=".pdf">
+                    <small style="color:#555; font-size:0.9rem;">Only PDF files are accepted</small>
+                </div>
+            </div>
         </div>
 
         <div class="col-12">
-          <label>Property Details</label>
-          <select name="propertyDetails" id="propertyDetails">
-            <option value="">Select</option>
-            <option value="coords">HAVE COORDINATES OF THE PROPERTY</option>
-            <option value="noCoords">DON'T HAVE COORDINATES OF THE PROPERTY</option>
-            <option value="survey">SURVEY NO/TOWN SURVEY NO</option>
-            <option value="revenue">NAME OF Revenue Village/Block & Ward</option>
-          </select>
-        </div>
-
-        <div class="col-12">
-          <input type="file" name="coordFile" id="coordFile" class="hidden" accept=".pdf">
-          <small id="coordMessage" style="color:#555; font-size:0.9rem;" class="hidden">Only PDF files are accepted</small>
-          <input type="text" name="surveyText" id="surveyText" class="hidden" placeholder="Enter Survey No">
-          <input type="text" name="revenueText" id="revenueText" class="hidden" placeholder="Enter Revenue Village/Block & Ward">
-        </div>
-
-        <div class="col-12">
-          <label for="briefRequest">Brief Description of Request</label>
-          <textarea name="briefRequest" id="briefRequest" placeholder="Please describe your request in detail" rows="5"></textarea>
-          <small class="error-msg" id="briefRequestError" style="color:red; display:none;">
+            <label for="briefRequest">Describe your Request</label>
+            <textarea name="briefRequest" id="briefRequest" placeholder="Describe your request (upto 500 words)"rows="5"></textarea>
+            <small class="error-msg" id="briefRequestError" style="color:red; display:none;">
             Please enter a maximum of 500 words.
-          </small>
+            </small>
         </div>
 
         <div class="col-12">
-          <label>Upload Documents</label>
-          <p class="doc-note">(ANY ONE OF THE COPY OF SALE DEED / AGREEMENT OF SALE / PATTADHAR PASS BOOK PAGES / ANY OTHER PROOF OF OWNERSHIP.)</p>
-          <input type="file" name="documents" id="documents" multiple accept=".pdf">
-          <small style="color:#555; font-size:0.9rem;">Please upload PDF files only</small>
+            <label>Proof of Ownership</label>
+            <p class="doc-note">(ANY ONE OF THE COPY OF SALE DEED / AGREEMENT OF SALE / PATTADHAR PASS BOOK PAGES / ANY OTHER PROOF OF OWNERSHIP.)</p>
+            <input type="file" name="documents" id="documents" multiple accept=".pdf">
+            <small style="color:#555; font-size:0.9rem;">Please upload PDF files only</small>
         </div>
 
-
-
-
-        <div style="flex: 0 0 50%; display: flex; flex-direction: column;">
-          <div class="id-type-group">
-            <label for="idSelect">Identity Proof</label>
-            <select id="idSelect" name="idSelect" required>
-              <option value="">Select</option>
-              <option value="pan">PAN</option>
-              <option value="tele">Telephone Bill</option>
-              <option value="elec">Electricity Bill</option>
-              <option value="voter">Voter ID</option>
-              <option value="dl">Driving Licence</option>
-            </select>
-          </div>
+        <div class="col-6">
+            <div class="id-type-group">
+                <label for="idSelect">Identity Proof</label>
+                <select id="idSelect" name="idSelect" required>
+                    <option value="">Select Identity Proof</option>
+                    <option value="pan">PAN</option>
+                    <option value="tele">Telephone Bill</option>
+                    <option value="elec">Electricity Bill</option>
+                    <option value="voter">Voter ID</option>
+                    <option value="dl">Driving Licence</option>
+                </select>
+            </div>
         </div>
         
-        <div style="flex: 0 0 50%;" id="idUploadWrapper">
-          <label id="idUploadLabel">Upload ID Document (PDF only)</label>
-          <input type="file" id="idUpload" name="idUpload" accept=".pdf">
-          <small style="color:#555; font-size:0.9rem;">Only PDF files are accepted</small>
+        <div class="col-6" id="idUploadWrapper">
+            <label id="idUploadLabel" for="idUpload">Upload ID Document (PDF only)</label>
+            <input type="file" id="idUpload" name="idUpload" accept=".pdf">
         </div>
       </div>
         <div class="col-12">
@@ -464,10 +574,10 @@
         </div>
 
         <div id="paymentSection" class="col-12 hidden">
-          <label>Registration/User charges (INR 2000/-)</label>
+          <p>Registration/User charges (INR 2000/-)</p>
           <p>You can pay the registration fee by scanning the QR code below:</p>
           <img src="qr.jpg" alt="QR Code" class="qr">
-          <label>Upload the Transaction Copy</label>
+          <label for="transactionCopy">Upload the Transaction Copy</label>
           <input type="file" name="transactionCopy" id="transactionCopy" accept=".pdf">
           <small style="color:#555; font-size:0.9rem;">Only PDF files are accepted</small>
         </div>        
@@ -509,12 +619,12 @@ const mandalsMap = {
 ].sort(),
 
 "Annamayya": [
-  "B.Kothakota","Chinnamandem","Chitvel","Galiveedu","Gurramkonda","K.V.Palli","Kalikiri","Kalkada","Kodur","Kurabalakota","Lakkireddypalli","Madanapalle","Mulakalacheruvu","Nandalur","Nimmanapalle","Obulavaripalli",
+  "B.Kothakota","Chinnamandem","Chitvel","Galiveedu","Gurramkonda","K.V.Palli","Kalikiri","Kalkada","Kodur","Kurabalakota","Lakkireddipalli","Madanapalle","Mulakalacheruvu","Nandalur","Nimmanapalle","Obulavaripalli",
   "Peddamandyam","Peddathippasamudram","Penagalur","Pileru","Pullampeta","Rajampet","Ramapuram","Ramasamudram", "Rayachoti","Sambepalli","Thamballapalle","Tsundupalli","Vayalpad","Veeraballi"
 ],
 
 "Bapatla": [
-  "Addanki","Amruthalur","Ballikurava","Bapatla","Bhattiprolu","Cherukupalle","Chinaganjam","Chirala","Inkollu","Janakavarampanguluru","Karlapalem","Karamchedu","Kollur","Korisapadu","Martur","Nagaram",
+  "Addanki","Amruthalur","Ballikurava","Bapatla","Bhattiprolu","Cherukupalle","Chinaganjam","Chirala","Inkollu","Janakavarampanguluru","Karlapalem","Kollur","Korisapadu","Martur","Nagaram",
   "Nizampatnam","Parchur","Pittalavanipalem","Repalle","Santhamaguluru","Tsundur","Vemuru","Vetapalem","Yeddanapudi"
 ],
   "Chittoor": [ "Baireddipalle", "Bangarupalyam", "Chittoor Rural", "Chittoor Urban", "Chowdepalle", "Gangadhara Nellore", "Gangavaram", "Gudipala", "Gudupalle","Irala","Karvetinagar","Kuppam","Nagari","Nindra","Palamaner","Palasamudram","Peddapanjani","Penumuru","Puthalapattu","Ramakuppam",
@@ -522,14 +632,14 @@ const mandalsMap = {
   ],
 
 "Dr. B. R. Ambedkar Konaseema District": ["Ainavilli","Alamuru","Allavaram","Amalapuram","Ambajipeta","Atreyapuram","I. Polavaram","K. Gangavaram","Kapileswarapuram","Katrenikona","Kothapeta","Malikipuram","Mandapeta","Mamidikuduru","Mummidivaram",
-  "P. Gannavaram","Ramachandrapuram","Razole","Ravulapalem","Rayavaram","Sakhinetipalle","Uppalaguptam"
+  "P. Gannavaram","Ramachandrapuram","Razole","Ravulapalem","Rayavaram","Sakhinetpalle","Uppalaguptam"
 ],
 
 
 "East Godavari": [
   "Addateegala","Alamuru","Amalapuram","Ambajipeta","Anaparthi","Atreyapuram","Biccavolu","Gajuwaka","Gangavaram","Gokavaram", "Gollaprolu","Kajuluru","Kadiam","Kakinda (Rural)","Kakinada (Urban)","Kapileswarapuram","Karapa","Katrenikona","Kothapalle",
   "Kothapeta","Korukonda","Maredumilli","Mandapeta","Mamidikuduru","Malikipuram","P Gannavaram","Pedapudi","Pithapuram","Peddapuram", "Rajanagaram","Rajahmundry (Rural)","Rajahmundry (Urban)","Rajavommangi","Ramachandrapuram","Rampachodavaram","Rangampeta",
-  "Razole","Sakhinetipalle","Samalkota","Seethanagaram","Thallarevu","Thondangi","Tuni","Uppalaguptam","Yeletwaram","Y Ramavaram","Gandepalle"
+  "Razole","Sakhinetpalle","Samalkota","Seethanagaram","Thallarevu","Thondangi","Tuni","Uppalaguptam","Yeletwaram","Y Ramavaram","Gandepalle"
 ].sort(),
 
 "Eluru": [
@@ -570,7 +680,7 @@ const mandalsMap = {
 "Prakasam": [
   "Addanki","Ardhaveedu","Ballikurava","Bestavaripeta","ChandraSekarapuram","Chirala","Chimakurthi","Chinaganjam","Cumbum","Darsip","Donakonda","Dornala","Inkollu","Giddalur","Gudlur","Hanumanthunipadu","Janakavaram Panguluru","Kanigiri",
   "Kandukur","Karamchedu","Komarolu","Konakanamitla","Korisapadu","Lingasamudram","Maddipadu","Markapur","Martur", "Marripudi","Mundlamuru","Naguluppalapadu","Ongole","Parchur","Pamur","Pedacherlopalle","Peda Araveedu","Ponnaluru",
-  "Racherla","Santhanuthlapadu","Santhamaguluru","Tangutur","Tarlapadu","Thallur","Veligandla","Vetapalem","Voletivaripalem", "Yeddanapudi","Yerragondapalem","Zarugumilli"
+  "Racherla","Santhanuthlapadu","Santhamaguluru","Tangutur","Tarlapadu","Veligandla","Vetapalem","Voletivaripalem", "Yeddanapudi","Yerragondapalem","Zarugumilli"
 ],
 "Sri Sathya Sai": ["AGALI","AMADAGUR","AMARAPURAM","BATHALAPALLE","BUKKAPATNAM","CHENNEKOTHAPALLI","CHILAMUTHUR","DHARMAVARAM","GANDLAPENTA","GORANTLA",
     "GUDIBANDA","HINDUPUR","KADIRI","KANAGAPALLI","KOTHACHERUVU","LEPAKSHI","MADAKASIRA","MUDIGUBBA","NALLACHERUVU","NALLAMADA","NAMBULAPULAKUNTA","OUBULADEVARACHERUVU",
@@ -592,11 +702,11 @@ const mandalsMap = {
 "Tirupati": [
     "BALAYAPALLI","BUCHINAIDU KHANDRIGA","CHILLAKUR","CHINNAGOTTIGALLU","CHITTAMUR","DAKKILI","DORAVARISATRAM","GUDUR","K V B PURAM","KOTA","NAIDUPET","NAGALAPURAM",
     "NARAYANAVANAM","OZILI","PAKALA","PELLAKUR","PICHATUR","PUTUR","RAMACHANDRAPURAM","RENIGUNTA","SATYAVEDU","SRIKALAHASTI","SULLURUPETA","TADA","THOTTAMBEDU","TIRUPATI",
-    "TIRUPATI RURAL","VADAMALAPETA","VAKADU","VARADAIAHPALEM","VENKATAGIRI","YERPEDU","YERRAVARIPALEM"
+    "TIRUPATI RURAL","VADAMALAPETA","VAKADU","VARADAIAHPALEM","VENKATAGIRI","VENKATACHALAM","VINAYAGARIPETA","VADAMALAPETA","VADAMALAPET","VAKADU","VARADAIAHPALEM","VENKATAGIRI","YERPEDU","YERRAVARIPALEM"
   ],
 "Vizianagaram": ["Badangi","Balajipeta","Bhogapuram","Bobbili","Bondapalle","Cheepurupalle","Dattirajeru","Denka","Garividi","Garugubilli","Gummalakshmipuram","Gurla","Gantyada","Jami","Jiymma Valasa","Kothavalasa","Kurupam","Lakkavarapukota","Makkuva","Mentada","Merakamudidam","Nellimarla","Parvathipuram","Pachipenta","Pusapatirega","Ramabhadrapuram","Salur","Seethanagaram","Therlam","Vepada","Vizianagaram","Srungavarapukota"],
 "YSR Kadapa": [
-  "Atlur","B.Kodur","Badvel","Brahmamgarimatham","Chakrayapet","Chapadu","Chennur","Chinnamandem","Chinthakomma Dinne","Chitvel","Duvvur","Galiveedu","Gopavaram","Jammalamadugu","Kadapa","Kalasapadu","Kamalapuram","Khajipet","Koduru",
+  "Atlur","B.Kodur","Badvel","Brahmamgarimatham","Chakrayapet","Chapadu","Chennur","Chinthakomma Dinne","Chitvel","Duvvur","Galiveedu","Gopavaram","Jammalamadugu","Kadapa","Kalasapadu","Kamalapuram","Khajipet","Koduru",
   "Kondapuram","Lakkireddipalle","Lingala","Muddanur","Mydukur","Mylavaram","Nandalur","Obulavaripalle","Peddamudium","Penagalur","Pendlimarri","Porumamilla","Proddatur","Pulivendula","Pullampeta","Rajampet","Rajupallem","Ramapuram",
   "Rayachoti","Sambepalle","Sidhout","Simhadripuram","Sri Avadhuth Kasinayana","T.Sundupalle","Thondur","Vallur","Veeraballi","Veerapanayapalle","Vempalle","Vemula","Vontimitta","Yerraguntla"
 ], 
@@ -672,7 +782,7 @@ const mandalsMap = {
   "Uppununtala","Achampet","Amrabad","Kalwakurty","Veldanda","Vangoor","Charakonda","Urkonda"
 ].sort(),
 "Nalgonda":[
-  "Advidevulapally","Anumula","Chandampet","Chandur","Chinthapalli","Chityala","Damaracherla","Devarakonda","Gattuppal","Gundlapalli","Gudipalli","Gurrampode",
+  "Advidevulapally","Anumula","Chandampet","Chandur","Chinthapalli","Chityala","Damaracherla","Devarakonda","Gattuppal","Gudipalli","Gurrampode",
 "Kattangoor","Kethepalli","Kondamallepally","Madugulapally","Marriguda","Munugodu","Nampalli","Nakerekal","Narketpalli","Neredugommu","Nidmanoor","P.A.Palli",
   "Peddavoora","Shali Gouraram","Thipparthy","Tirumalagiri","Vemulapalli","Miryalaguda"
 ],
@@ -701,7 +811,7 @@ const mandalsMap = {
     "Jagadevapur","Markook","Wargal","Mulugu","Cherial","Komuravelly","Maddur","Husnabad Urban","Akkannapeta","Koheda","Bejjenki","Dhoolmitta","Akbarpet-Bhoompally","Kukunoorpally"
   ].sort(),
 
-  "Suryapet": [ "Chilkur","Palakeedu", "Chivvemla", "Ananthagiri", "Huzurnagar", "Mothey", "Kodad", "Mellachervu", "Jajireddygudem", "Munagala", "Mallareddygudem", "Nuthankal",
+  "Suryapet": [ "Chilkur","Palakeedu", "Chivvemla", "Ananthagiri", "Huzurnagar", "Mothey", "Kodad", "Mellachervu", "Munagala", "Mallareddigudem", "Nuthankal",
     "Nadigudem","Mattampally","Penpahad","Nereducherla","Athmakur(S)","Garidepally","Thirumalagiri","Thungathurthy","Nagaram","Maddirala"
   ].sort(),
   "Vikarabad": ["Dharanapally","Pargi","Puduru","Tandur","Taunguru","Vikarabad","Yenkapally","Chilkoor","Kondapur","Kondurg","Mabeda","Manchirevula","Maripally",
@@ -750,6 +860,22 @@ const mandalsMap = {
     const propDistrict = document.getElementById("prop_district");
     const propMandal = document.getElementById("prop_mandal");
 
+    // New property type elements
+    const propertyTypeSelect = document.getElementById("propertyType");
+    const propertyInfoSection = document.getElementById("propertyInfoSection");
+    const housePlotLandNoField = document.getElementById("housePlotLandNoField");
+    const housePlotLandNoInput = document.getElementById("housePlotLandNo");
+    const colonyLayoutField = document.getElementById("colonyLayoutField");
+    const surveyNoInput = document.getElementById("surveyNo");
+    const townSurveyNoInput = document.getElementById("townSurveyNo");
+    const revenueVillageInput = document.getElementById("revenueVillage");
+    const blockInput = document.getElementById("block");
+    const wardInput = document.getElementById("ward");
+
+    const hasCoordinatesSelect = document.getElementById("hasCoordinatesSelect");
+    const coordUploadField = document.getElementById("coordUploadField");
+    const coordFile = document.getElementById("coordFile");
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
       // Reset form and set autocomplete off
@@ -759,7 +885,7 @@ const mandalsMap = {
         input.setAttribute('autocorrect', 'off');
         input.setAttribute('autocapitalize', 'off');
         input.setAttribute('spellcheck', 'false');
-        input.value = '';
+        if (input.type !== 'file') input.value = '';
       });
       document.getElementById('propertyForm').reset();
       
@@ -774,7 +900,7 @@ const mandalsMap = {
 
     // Toggle between owner and representative fields
     function toggleOwnerRepFields() {
-      if (ownerApplicantSelect.value === "owner") {
+      if (ownerApplicantSelect.value === "Property Owner") {
         ownerWrapper.classList.remove("hidden");
         repWrapper.classList.add("hidden");
         document.getElementById("ownerFirstName").required = true;
@@ -786,7 +912,7 @@ const mandalsMap = {
         document.getElementById("repSurname").required = false;
         document.getElementById("rep_mobile").required = false;
         document.getElementById("rep_email").required = false;
-      } else if (ownerApplicantSelect.value === "rep") {
+      } else if (ownerApplicantSelect.value === "Representative") {
         ownerWrapper.classList.add("hidden");
         repWrapper.classList.remove("hidden");
         document.getElementById("ownerFirstName").required = false;
@@ -861,6 +987,68 @@ const mandalsMap = {
       }
     }
 
+    // Function to handle conditional enabling/disabling of fields
+    function toggleSurveyFields(fieldChanged) {
+        if (fieldChanged === 'surveyNo') {
+            // Disable Town Survey related fields
+            townSurveyNoInput.value = '';
+            townSurveyNoInput.disabled = true;
+            blockInput.value = '';
+            blockInput.disabled = true;
+            wardInput.value = '';
+            wardInput.disabled = true;
+
+            // Enable Survey No related fields
+            revenueVillageInput.disabled = false;
+        } else if (fieldChanged === 'townSurveyNo') {
+            // Disable Survey No related fields
+            surveyNoInput.value = '';
+            surveyNoInput.disabled = true;
+            revenueVillageInput.value = '';
+            revenueVillageInput.disabled = true;
+
+            // Enable Town Survey related fields
+            blockInput.disabled = false;
+            wardInput.disabled = false;
+        } else if (fieldChanged === 'none') {
+            // Re-enable all fields when both are empty
+            surveyNoInput.disabled = false;
+            revenueVillageInput.disabled = false;
+            townSurveyNoInput.disabled = false;
+            blockInput.disabled = false;
+            wardInput.disabled = false;
+        }
+    }
+
+    // Function to toggle property details sections
+    function togglePropertyDetails() {
+        const type = propertyTypeSelect.value;
+        
+        propertyInfoSection.classList.add("hidden");
+        housePlotLandNoField.classList.add("hidden");
+        colonyLayoutField.classList.add("hidden");
+        
+        // Always reset disabled state first
+        housePlotLandNoInput.disabled = false;
+        document.getElementById("prop_colony").disabled = false;
+        
+        if (type) {
+            propertyInfoSection.classList.remove("hidden");
+            housePlotLandNoField.classList.remove("hidden");
+            colonyLayoutField.classList.remove("hidden");
+
+            if (type === "Land") {
+                housePlotLandNoInput.placeholder = "Land No";
+                housePlotLandNoInput.disabled = true;
+                document.getElementById("prop_colony").disabled = true;
+            } else if (type === "Plot") {
+                housePlotLandNoInput.placeholder = "Plot No";
+            } else if (type === "House") {
+                housePlotLandNoInput.placeholder = "House No";
+            }
+        }
+    }
+
     // Event listeners
     ownerApplicantSelect.addEventListener("change", toggleOwnerRepFields);
     
@@ -900,15 +1088,34 @@ const mandalsMap = {
       populateMandals(propState.value, this.value, propMandal);
     });
 
-    // Property Details toggle
-    const propertyDetails = document.getElementById("propertyDetails");
-    propertyDetails.addEventListener("change", () => {
-      document.getElementById("coordFile").classList.add("hidden");
-      document.getElementById("surveyText").classList.add("hidden");
-      document.getElementById("revenueText").classList.add("hidden");
-      if (propertyDetails.value === "coords") document.getElementById("coordFile").classList.remove("hidden");
-      if (propertyDetails.value === "survey") document.getElementById("surveyText").classList.remove("hidden");
-      if (propertyDetails.value === "revenue") document.getElementById("revenueText").classList.remove("hidden");
+    // New event listeners for property fields
+    propertyTypeSelect.addEventListener("change", togglePropertyDetails);
+
+    surveyNoInput.addEventListener('input', () => {
+        if (surveyNoInput.value.trim() !== '') {
+            toggleSurveyFields('surveyNo');
+        } else if (townSurveyNoInput.value.trim() === '') {
+            toggleSurveyFields('none');
+        }
+    });
+
+    townSurveyNoInput.addEventListener('input', () => {
+        if (townSurveyNoInput.value.trim() !== '') {
+            toggleSurveyFields('townSurveyNo');
+        } else if (surveyNoInput.value.trim() === '') {
+            toggleSurveyFields('none');
+        }
+    });
+
+    hasCoordinatesSelect.addEventListener('change', (e) => {
+        if (e.target.value === 'yes') {
+            coordUploadField.classList.remove('hidden');
+            coordFile.required = true;
+        } else {
+            coordUploadField.classList.add('hidden');
+            coordFile.value = '';
+            coordFile.required = false;
+        }
     });
 
     // Guidelines toggle payment
@@ -971,6 +1178,14 @@ const mandalsMap = {
       submitBtn.disabled = true;
       submitBtn.textContent = "Submitting...";
       
+      // Determine identification type based on non-empty field
+      let identificationType = '';
+      if (surveyNoInput.value.trim() !== '') {
+          identificationType = 'survey';
+      } else if (townSurveyNoInput.value.trim() !== '') {
+          identificationType = 'town';
+      }
+
       // Prepare form data
       const data = {
         ownerApplicant: ownerApplicantSelect.value,
@@ -995,19 +1210,23 @@ const mandalsMap = {
         rep_mandal: f.rep_mandal.value,
         rep_mobile: f.rep_mobile.value,
         rep_email: f.rep_email.value,
-        propertyType: f.propertyType.value,
-        prop_house: f.prop_house.value,
+        propertyType: propertyTypeSelect.value,
+        prop_housePlotLandNo: f.housePlotLandNo.value,
         prop_colony: f.prop_colony.value,
         prop_village: f.prop_village.value,
         prop_state: f.prop_state.value,
         prop_district: f.prop_district.value,
         prop_mandal: f.prop_mandal.value,
-        propertyDetails: f.propertyDetails.value,
-        surveyText: f.surveyText.value,
-        revenueText: f.revenueText.value,
+        hasCoordinates: f.hasCoordinatesSelect.value,
         briefRequest: f.briefRequest.value,
         docSubmit: "Yes",
-        idSelect: f.idSelect.value
+        idSelect: f.idSelect.value,
+        identificationType: identificationType,
+        surveyNo: f.surveyNo.value,
+        revenueVillage: f.revenueVillage.value,
+        townSurveyNo: f.townSurveyNo.value,
+        block: f.block.value,
+        ward: f.ward.value
       };
 
       // Process file uploads
@@ -1039,7 +1258,7 @@ const mandalsMap = {
 
       // Submit form data
       try{
-        let res = await fetch("https://script.google.com/macros/s/AKfycbzZhUb3NMpsO7MQYhnAQj3X4qMkMpDnmA8PSWeHF6-5PE1Rjq_mLceGdaRivljq2a0g/exec", {
+        let res = await fetch("https://script.google.com/macros/s/AKfycbx6CCivIWenm973QOFVWNvgd3uv5yjIU2EjFec2qVJGxZ3SVdX3ubCaMy83gzbcSOs/exec", {
           method: "POST",
           body: JSON.stringify(data)
         });
